@@ -97,7 +97,7 @@ export const Date = styled.time`
 export const Name = styled.h1`
   font-weight: bold;
   font-size: 18px;
-  line-height: 10px;
+  line-height: 20px;
   margin-bottom: 8px;
   color: var(--text-primary);
 `;
