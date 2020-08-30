@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import SearchBox from '../../components/SearchBox';
 
-import { Container } from './styles';
+import { Container, AutoCompleteItem } from './styles';
 
+interface SearchResponse {
+  items: User[];
+}
 interface User {
-  key: number;
-  name: string;
+  id: number;
+  login: string;
 }
 
 const SearchPage: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const [autoCompleteItems, setAutoCompleteItems] = useState<User[]>([
+    { id: 1, login: 'mpirescarvalho' },
+    { id: 2, login: 'mpires' },
+  ]);
+
   const history = useHistory();
 
   function handleGoToTimeline(username: string) {
@@ -19,7 +28,25 @@ const SearchPage: React.FC = () => {
     }
   }
 
-  function handleAutoComplete(partialUsername: string) {}
+  const handleAutoComplete = useCallback((partialUsername: string) => {
+    // if (partialUsername) {
+    //   setLoading(true);
+    //   fetch(
+    //     `https://api.github.com/search/users?q=${partialUsername}+in:login&per_page=4&page=1`
+    //   )
+    //     .then(response => response.json())
+    //     .then((res: SearchResponse) => {
+    //       setLoading(false);
+    //       setAutoCompleteItems(res.items);
+    //     })
+    //     .catch(err => {
+    //       setLoading(false);
+    //       console.error(err);
+    //     });
+    // } else {
+    //   setAutoCompleteItems([]);
+    // }
+  }, []);
 
   return (
     <Container>
@@ -28,13 +55,14 @@ const SearchPage: React.FC = () => {
         placeholder="username..."
         onChange={handleAutoComplete}
         onSubmit={handleGoToTimeline}
-        autoCompleteLoading={false}
-        autoCompleteData={[
-          { key: 1, name: 'abc' },
-          { key: 2, name: 'cde' },
-          { key: 3, name: 'efg' },
-        ]}
-        autoCompleteRender={item => <div>{item.name}</div>}
+        debounceTimeout={800}
+        autoCompleteLoading={loading}
+        autoCompleteData={autoCompleteItems}
+        autoCompleteRender={(item, active) => (
+          <AutoCompleteItem className={`${active && 'active'}`}>
+            {item.login}
+          </AutoCompleteItem>
+        )}
       />
     </Container>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdSearch } from 'react-icons/md';
 import { DebounceInput } from 'react-debounce-input';
 import PulseLoader from 'react-spinners/PulseLoader';
@@ -13,7 +13,7 @@ interface SearchBoxProps<T> {
   autoCompleteData?: T[];
   onSubmit(value: string | T): void;
   onChange(value: string): void;
-  autoCompleteRender(item: T, index: number): JSX.Element;
+  autoCompleteRender(item: T, active: boolean): JSX.Element;
 }
 
 function SearchBox<T extends {}>({
@@ -32,6 +32,10 @@ function SearchBox<T extends {}>({
     e.preventDefault();
     onSubmit(value);
   }
+
+  useEffect(() => {
+    onChange(value);
+  }, [onChange, value]);
 
   return (
     <Wrapper>
@@ -55,7 +59,9 @@ function SearchBox<T extends {}>({
         </LoadingContainer>
       ) : (
         autoCompleteData && (
-          <div>{autoCompleteData.map(autoCompleteRender)}</div>
+          <div>
+            {autoCompleteData.map(item => autoCompleteRender(item, false))}
+          </div>
         )
       )}
     </Wrapper>
