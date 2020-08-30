@@ -8,7 +8,6 @@ import { Wrapper, ContainerInput, LoadingContainer } from './styles';
 interface SearchBoxProps<T> {
   placeholder?: string;
   debounceTimeout?: number;
-  minLength?: number;
   autoCompleteLoading?: boolean;
   autoCompleteData?: T[];
   onSubmit(value: string | T): void;
@@ -21,31 +20,60 @@ function SearchBox<T extends {}>({
   onChange,
   placeholder,
   debounceTimeout = 300,
-  minLength = 3,
   autoCompleteLoading,
   autoCompleteData,
   autoCompleteRender,
 }: SearchBoxProps<T>) {
   const [value, setValue] = useState<string>('');
+  const [activeItem, setActiveItem] = useState(0);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    onSubmit(value);
+    if (
+      !autoCompleteLoading &&
+      autoCompleteData &&
+      autoCompleteData.length > 0
+    ) {
+      onSubmit(autoCompleteData[activeItem]);
+    } else {
+      onSubmit(value);
+    }
   }
 
   useEffect(() => {
     onChange(value);
   }, [onChange, value]);
 
+  useEffect(() => {
+    setActiveItem(0);
+  }, [autoCompleteData]);
+
+  function handleActiveItemChange({ keyCode }: { keyCode: number }) {
+    //UpArrow
+    if (keyCode === 38) {
+      if (activeItem > 0) {
+        setActiveItem(activeItem - 1);
+      }
+    }
+
+    //DownArrow
+    if (keyCode === 40) {
+      if (activeItem < (autoCompleteData?.length || 0) - 1) {
+        setActiveItem(activeItem + 1);
+      }
+    }
+  }
+
   return (
-    <Wrapper>
+    <Wrapper onKeyDown={handleActiveItemChange} tabIndex={0}>
       <ContainerInput onSubmit={handleSubmit}>
         <DebounceInput
           value={value}
           onChange={e => setValue(e.target.value)}
+          forceNotifyByEnter={true}
           placeholder={placeholder}
           debounceTimeout={debounceTimeout}
-          minLength={minLength}
+          minLength={0}
         />
 
         <button type="submit">
@@ -60,7 +88,9 @@ function SearchBox<T extends {}>({
       ) : (
         autoCompleteData && (
           <div>
-            {autoCompleteData.map(item => autoCompleteRender(item, false))}
+            {autoCompleteData.map((item, index) =>
+              autoCompleteRender(item, index === activeItem)
+            )}
           </div>
         )
       )}
