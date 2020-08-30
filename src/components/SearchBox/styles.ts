@@ -1,19 +1,27 @@
 import styled from 'styled-components';
 
-export const Container = styled.form`
+export const Wrapper = styled.div`
   width: 90%;
   max-width: 550px;
-  height: 50px;
 
   background: var(--box);
 
   border-radius: 4px;
   border: 1px solid var(--border);
+`;
+
+export const ContainerInput = styled.form`
+  height: 50px;
 
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: stretch;
+
+  &.complete-items {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 
   input {
     flex: 1;
@@ -40,4 +48,13 @@ export const Container = styled.form`
       background: var(--primary-darker);
     }
   }
+`;
+
+export const LoadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
 `;

@@ -1,34 +1,65 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { MdSearch } from 'react-icons/md';
+import { DebounceInput } from 'react-debounce-input';
+import PulseLoader from 'react-spinners/PulseLoader';
 
-import { Container } from './styles';
+import { Wrapper, ContainerInput, LoadingContainer } from './styles';
 
-const SearchBox: React.FC = () => {
-  const [username, setUsername] = useState('');
+interface SearchBoxProps<T> {
+  placeholder?: string;
+  debounceTimeout?: number;
+  minLength?: number;
+  autoCompleteLoading?: boolean;
+  autoCompleteData?: T[];
+  onSubmit(value: string | T): void;
+  onChange(value: string): void;
+  autoCompleteRender(item: T, index: number): JSX.Element;
+}
 
-  const history = useHistory();
+function SearchBox<T extends {}>({
+  onSubmit,
+  onChange,
+  placeholder,
+  debounceTimeout = 300,
+  minLength = 3,
+  autoCompleteLoading,
+  autoCompleteData,
+  autoCompleteRender,
+}: SearchBoxProps<T>) {
+  const [value, setValue] = useState<string>('');
 
-  function handleGoToTimeline(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (username) {
-      history.push(`timeline/${username}`);
-    }
+    onSubmit(value);
   }
 
   return (
-    <Container onSubmit={handleGoToTimeline}>
-      <input
-        name="username"
-        placeholder="username..."
-        value={username}
-        onChange={e => setUsername(e.target.value)}
-      />
-      <button type="submit">
-        <MdSearch size={24} color="#fff" />
-      </button>
-    </Container>
+    <Wrapper>
+      <ContainerInput onSubmit={handleSubmit}>
+        <DebounceInput
+          value={value}
+          onChange={e => setValue(e.target.value)}
+          placeholder={placeholder}
+          debounceTimeout={debounceTimeout}
+          minLength={minLength}
+        />
+
+        <button type="submit">
+          <MdSearch size={24} color="#fff" />
+        </button>
+      </ContainerInput>
+
+      {autoCompleteLoading ? (
+        <LoadingContainer>
+          <PulseLoader size={8} color="#9B1768" />
+        </LoadingContainer>
+      ) : (
+        autoCompleteData && (
+          <div>{autoCompleteData.map(autoCompleteRender)}</div>
+        )
+      )}
+    </Wrapper>
   );
-};
+}
 
 export default SearchBox;
