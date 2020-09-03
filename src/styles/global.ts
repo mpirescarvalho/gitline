@@ -9,10 +9,6 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body {
-    -webkit-font-smoothing: antialiased;
-  }
-
   body, input, button {
     font: 14px 'Poppins', sans-serif;
   }
@@ -38,9 +34,18 @@ export default createGlobalStyle`
     --box-in-secondary: #F1F1F1;
 
     --text-primary: #4F4F4F;
-    --text-primary-in-background: #FFF;
     --text-secondary: #8E8E8E;
+    --text-primary-in-background: #FFF;
+    --text-secondary-in-background: #DADADA;
     --text-in-secondary: #CBCBCB;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+
+    background: var(--background);
+    min-width: 100vw;
+    min-height: 100vh;
   }
 
 `;
