@@ -3,7 +3,12 @@ import { MdSearch } from 'react-icons/md';
 import { DebounceInput } from 'react-debounce-input';
 import PulseLoader from 'react-spinners/PulseLoader';
 
-import { Wrapper, ContainerInput, LoadingContainer } from './styles';
+import {
+  Wrapper,
+  ContainerInput,
+  LoadingContainer,
+  ItemContainer,
+} from './styles';
 
 interface SearchBoxProps<T> {
   placeholder?: string;
@@ -27,6 +32,14 @@ function SearchBox<T extends {}>({
   const [value, setValue] = useState<string>('');
   const [activeItem, setActiveItem] = useState(0);
 
+  useEffect(() => {
+    onChange(value);
+  }, [onChange, value]);
+
+  useEffect(() => {
+    setActiveItem(0);
+  }, [autoCompleteData]);
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (
@@ -40,15 +53,7 @@ function SearchBox<T extends {}>({
     }
   }
 
-  useEffect(() => {
-    onChange(value);
-  }, [onChange, value]);
-
-  useEffect(() => {
-    setActiveItem(0);
-  }, [autoCompleteData]);
-
-  function handleActiveItemChange({ keyCode }: { keyCode: number }) {
+  function handleKeyDown({ keyCode }: { keyCode: number }) {
     //UpArrow
     if (keyCode === 38) {
       if (activeItem > 0) {
@@ -64,8 +69,12 @@ function SearchBox<T extends {}>({
     }
   }
 
+  function handleItemMouseMove(index: number) {
+    setActiveItem(index);
+  }
+
   return (
-    <Wrapper onKeyDown={handleActiveItemChange} tabIndex={0}>
+    <Wrapper onKeyDown={handleKeyDown} tabIndex={0}>
       <ContainerInput onSubmit={handleSubmit}>
         <DebounceInput
           value={value}
@@ -88,9 +97,14 @@ function SearchBox<T extends {}>({
       ) : (
         autoCompleteData && (
           <div>
-            {autoCompleteData.map((item, index) =>
-              autoCompleteRender(item, index === activeItem)
-            )}
+            {autoCompleteData.map((item, index) => (
+              <ItemContainer
+                onMouseEnter={() => handleItemMouseMove(index)}
+                onClick={() => onSubmit(autoCompleteData[index])}
+              >
+                {autoCompleteRender(item, index === activeItem)}
+              </ItemContainer>
+            ))}
           </div>
         )
       )}

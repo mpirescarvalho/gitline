@@ -58,3 +58,7 @@ export const LoadingContainer = styled.div`
   border-top: 1px solid var(--border);
   padding-top: 6px;
 `;
+
+export const ItemContainer = styled.div`
+  cursor: pointer;
+`;

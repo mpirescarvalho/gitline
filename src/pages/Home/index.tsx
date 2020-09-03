@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import SearchBox from '../../components/SearchBox';
 
@@ -67,7 +65,6 @@ const SearchPage: React.FC = () => {
           )}
         />
       </Container>
-      <ToastContainer />
     </>
   );
 };
