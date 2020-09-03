@@ -95,11 +95,13 @@ export const Date = styled.time`
 `;
 
 export const Name = styled.h1`
+  align-self: stretch;
   font-weight: bold;
   font-size: 18px;
   line-height: 20px;
   margin-bottom: 8px;
   color: var(--text-primary);
+  word-wrap: break-word;
 `;
 
 export const Description = styled.p`

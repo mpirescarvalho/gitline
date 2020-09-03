@@ -19,7 +19,7 @@ const Timeline: React.FC = () => {
   const { username } = useParams();
 
   useEffect(() => {
-    fetch(`https://api.github.com/users/${username}/repos`)
+    fetch(`https://api.github.com/users/${username}/repos?sort=created`)
       .then(response => {
         if (response.status === 404) {
           setNotFound(true);
