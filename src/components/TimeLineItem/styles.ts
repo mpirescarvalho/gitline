@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   width: 605px;
   padding: 0 40px;
 
@@ -11,62 +12,56 @@ export const Container = styled.div`
 
   &.left {
     justify-content: flex-start;
-
-    &::before {
-      content: '';
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      margin-top: 10px;
-      left: 50%;
-      margin-left: -8px;
-      border-radius: 50%;
-      background: var(--box);
-      border: 5px solid var(--primary);
-    }
-
-    &::after {
-      content: '';
-      width: 11px;
-      height: 11px;
-      background: var(--box);
-      margin-top: 13px;
-      margin-left: -6px;
-      border-top: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      box-shadow: 2px -1px 1px -1px rgba(0, 0, 0, 0.2);
-      transform: rotateZ(45deg);
-    }
   }
 
   &.right {
     justify-content: flex-end;
+  }
+`;
 
-    &::before {
-      content: '';
-      width: 11px;
-      height: 11px;
-      background: var(--box);
-      margin-top: 13px;
-      margin-right: -6px;
-      border-top: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      transform: rotateZ(225deg);
-      z-index: 5;
-    }
+export const TimelinePoint = styled.div`
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin-top: 10px;
+  left: 50%;
+  margin-left: -8px;
+  border-radius: 50%;
+  background: var(--box);
+  border: 5px solid var(--primary);
+  box-sizing: content-box;
+`;
 
-    &::after {
-      content: '';
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      margin-top: 10px;
-      left: 50%;
-      margin-left: -8px;
-      border-radius: 50%;
-      background: var(--box);
-      border: 5px solid var(--primary);
-    }
+export const Arrow = styled.div`
+  box-sizing: content-box;
+  width: 11px;
+  height: 11px;
+  background: var(--box);
+  margin-top: 13px;
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  z-index: 5;
+
+  &.right {
+    margin-right: -6px;
+    transform: rotateZ(225deg);
+  }
+
+  &.left {
+    margin-left: -6px;
+    box-shadow: 2px -1px 1px -1px rgba(0, 0, 0, 0.2);
+    transform: rotateZ(45deg);
+  }
+`;
+
+export const Content = styled(motion.div)`
+  &.right {
+    display: flex;
+    flex-direction: row;
+  }
+  &.left {
+    display: flex;
+    flex-direction: row-reverse;
   }
 `;
 

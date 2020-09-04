@@ -52,6 +52,7 @@ const Timeline: React.FC = () => {
         <Container>
           {repos.map((repo, index) => (
             <TimeLineItem
+              key={index}
               position={index % 2 === 0 ? 'left' : 'right'}
               date={formatDate(repo.created_at)}
               name={repo.name}

@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
-import { Container, Item, Date, Name, Description } from './styles';
+import useVisibility from '../../hooks/useVisibility';
+
+import {
+  Container,
+  TimelinePoint,
+  Arrow,
+  Content,
+  Item,
+  Date,
+  Name,
+  Description,
+} from './styles';
 
 interface TimeLineItemProps {
   position?: 'left' | 'right';
@@ -15,13 +26,45 @@ const TimeLineItem: React.FC<TimeLineItemProps> = ({
   date,
   description,
 }) => {
+  const [isVisible, ref] = useVisibility<HTMLDivElement>(-30);
+  const showed = useRef(false);
+
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  const variantsTransform = {
+    final: { x: 0 },
+    right: { x: 300 },
+    left: { x: -300 },
+  };
+
+  useEffect(() => {
+    if (isVisible) showed.current = true;
+  }, [isVisible]);
+
   return (
-    <Container className={position}>
-      <Item className={position}>
-        <Date>{date}</Date>
-        <Name>{name}</Name>
-        <Description>{description}</Description>
-      </Item>
+    <Container
+      initial={isVisible ? 'visible' : 'hidden'}
+      animate={isVisible || showed.current ? 'visible' : 'hidden'}
+      variants={variants}
+      className={position}
+    >
+      <TimelinePoint />
+      <Content
+        initial={isVisible ? 'final' : position}
+        animate={isVisible || showed.current ? 'final' : position}
+        variants={variantsTransform}
+        className={position}
+      >
+        <Arrow className={position} />
+        <Item ref={ref}>
+          <Date>{date}</Date>
+          <Name>{name}</Name>
+          <Description>{description}</Description>
+        </Item>
+      </Content>
     </Container>
   );
 };
