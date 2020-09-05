@@ -89,7 +89,7 @@ export const Date = styled.time`
   margin-bottom: 22px;
 `;
 
-export const Name = styled.h1`
+export const Name = styled.a`
   align-self: stretch;
   font-weight: bold;
   font-size: 18px;
@@ -97,6 +97,11 @@ export const Name = styled.h1`
   margin-bottom: 8px;
   color: var(--text-primary);
   word-wrap: break-word;
+  text-decoration: none;
+  transition: color 0.2s;
+  &:hover {
+    color: var(--secondary);
+  }
 `;
 
 export const Description = styled.p`

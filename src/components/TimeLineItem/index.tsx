@@ -18,6 +18,7 @@ interface TimeLineItemProps {
   name: string;
   date: string;
   description: string;
+  url: string;
 }
 
 const TimeLineItem: React.FC<TimeLineItemProps> = ({
@@ -25,6 +26,7 @@ const TimeLineItem: React.FC<TimeLineItemProps> = ({
   name,
   date,
   description,
+  url,
 }) => {
   const [isVisible, ref] = useVisibility<HTMLDivElement>(-30);
   const showed = useRef(false);
@@ -61,7 +63,9 @@ const TimeLineItem: React.FC<TimeLineItemProps> = ({
         <Arrow className={position} />
         <Item ref={ref}>
           <Date>{date}</Date>
-          <Name>{name}</Name>
+          <Name href={url} target="_blank">
+            {name}
+          </Name>
           <Description>{description}</Description>
         </Item>
       </Content>

@@ -10,6 +10,7 @@ interface Repo {
   name: string;
   description: string;
   created_at: Date;
+  html_url: string;
 }
 
 const Timeline: React.FC = () => {
@@ -57,6 +58,7 @@ const Timeline: React.FC = () => {
               date={formatDate(repo.created_at)}
               name={repo.name}
               description={repo.description}
+              url={repo.html_url}
             />
           ))}
         </Container>
