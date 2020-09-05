@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { analytics } from 'firebase/app';
+
+import { useLogPageView } from '../../hooks/analytics';
 
 import NotFound from '../NotFound';
 import TimeLineItem from '../../components/TimeLineItem';
@@ -19,7 +22,13 @@ const Timeline: React.FC = () => {
 
   const { username } = useParams();
 
+  useLogPageView('home_page');
+
   useEffect(() => {
+    analytics().logEvent('view_search_results', {
+      search_term: username,
+    });
+
     fetch(`https://api.github.com/users/${username}/repos?sort=created`)
       .then(response => {
         if (response.status === 404) {
