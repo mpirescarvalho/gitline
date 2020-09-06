@@ -39,5 +39,9 @@ export const Container = styled.div`
       var(--box-secondary) 95%,
       var(--background) 99%
     );
+
+    @media (max-width: 600px) {
+      left: 10%;
+    }
   }
 `;

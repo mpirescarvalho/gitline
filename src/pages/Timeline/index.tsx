@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { analytics } from 'firebase/app';
 
 import { useLogPageView } from '../../hooks/analytics';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 import NotFound from '../NotFound';
 import TimeLineItem from '../../components/TimeLineItem';
@@ -21,6 +22,7 @@ const Timeline: React.FC = () => {
   const [notFound, setNotFound] = useState(false);
 
   const { username } = useParams();
+  const { width } = useWindowDimensions();
 
   useLogPageView('home_page');
 
@@ -63,7 +65,7 @@ const Timeline: React.FC = () => {
           {repos.map((repo, index) => (
             <TimeLineItem
               key={index}
-              position={index % 2 === 0 ? 'left' : 'right'}
+              position={index % 2 !== 0 || width <= 600 ? 'right' : 'left'}
               date={formatDate(repo.created_at)}
               name={repo.name}
               description={repo.description}

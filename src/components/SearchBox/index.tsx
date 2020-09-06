@@ -99,6 +99,7 @@ function SearchBox<T extends {}>({
           <div>
             {autoCompleteData.map((item, index) => (
               <ItemContainer
+                key={index}
                 onMouseEnter={() => handleItemMouseMove(index)}
                 onClick={() => onSubmit(autoCompleteData[index])}
               >

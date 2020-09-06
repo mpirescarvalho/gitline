@@ -17,6 +17,15 @@ export const Container = styled(motion.div)`
   &.right {
     justify-content: flex-end;
   }
+
+  @media (max-width: 600px) {
+    justify-content: flex-start !important;
+    margin-left: 10% !important;
+    align-self: flex-start !important;
+    width: 100% !important;
+    padding-right: calc(10% + 40px) !important;
+    margin-bottom: 13px;
+  }
 `;
 
 export const TimelinePoint = styled.div`
@@ -30,6 +39,10 @@ export const TimelinePoint = styled.div`
   background: var(--box);
   border: 5px solid var(--primary);
   box-sizing: content-box;
+
+  @media (max-width: 600px) {
+    left: 10%;
+  }
 `;
 
 export const Arrow = styled.div`
@@ -63,6 +76,10 @@ export const Content = styled(motion.div)`
     display: flex;
     flex-direction: row-reverse;
   }
+
+  @media (max-width: 600px) {
+    flex: 1;
+  }
 `;
 
 export const Item = styled.div`
@@ -76,6 +93,10 @@ export const Item = styled.div`
   position: relative;
   border: 1px solid var(--border);
   box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 600px) {
+    flex: 1;
+  }
 `;
 
 export const Date = styled.time`
