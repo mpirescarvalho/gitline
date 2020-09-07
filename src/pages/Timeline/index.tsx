@@ -9,7 +9,7 @@ import NotFound from '../NotFound';
 import TimeLineItem from '../../components/TimeLineItem';
 import Footer from '../../components/Footer';
 
-import { Scroll, Container } from './styles';
+import { Scroll, Container, ContainerNoRepo } from './styles';
 
 interface Repo {
   name: string;
@@ -19,7 +19,7 @@ interface Repo {
 }
 
 const Timeline: React.FC = () => {
-  const [repos, setRepos] = useState<Repo[]>([]);
+  const [repos, setRepos] = useState<Repo[] | undefined>();
   const [notFound, setNotFound] = useState(false);
 
   const { username } = useParams();
@@ -59,24 +59,33 @@ const Timeline: React.FC = () => {
     return <NotFound />;
   }
 
-  if (repos.length > 0) {
-    return (
-      <Scroll>
-        <Container>
-          {repos.map((repo, index) => (
-            <TimeLineItem
-              key={index}
-              position={index % 2 !== 0 || width <= 600 ? 'right' : 'left'}
-              date={formatDate(repo.created_at)}
-              name={repo.name}
-              description={repo.description}
-              url={repo.html_url}
-            />
-          ))}
-        </Container>
+  if (repos) {
+    if (repos.length > 0) {
+      return (
+        <Scroll>
+          <Container>
+            {repos.map((repo, index) => (
+              <TimeLineItem
+                key={index}
+                position={index % 2 !== 0 || width <= 600 ? 'right' : 'left'}
+                date={formatDate(repo.created_at)}
+                name={repo.name}
+                description={repo.description}
+                url={repo.html_url}
+              />
+            ))}
+          </Container>
 
+          <Footer />
+        </Scroll>
+      );
+    }
+
+    return (
+      <ContainerNoRepo>
+        <p>{username} doesn’t have any public repositories yet.</p>
         <Footer />
-      </Scroll>
+      </ContainerNoRepo>
     );
   }
 

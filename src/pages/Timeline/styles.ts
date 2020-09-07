@@ -52,3 +52,28 @@ export const Container = styled.div`
     }
   }
 `;
+
+export const ContainerNoRepo = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+    font-size: 18px;
+    color: var(--text-primary-in-background);
+    font-weight: bold;
+  }
+
+  footer {
+    margin-bottom: 20px;
+  }
+`;
