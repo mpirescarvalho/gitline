@@ -21,6 +21,19 @@ export const Container = styled.div`
     margin-bottom: 3px;
     color: var(--text-primary-in-background);
   }
+
+  > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  footer {
+    margin-bottom: 20px;
+  }
 `;
 
 export const AutoCompleteItem = styled.div`

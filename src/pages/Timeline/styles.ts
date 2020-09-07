@@ -4,6 +4,13 @@ export const Scroll = styled.div`
   min-height: 100vh;
   width: 100vw;
   overflow-x: hidden;
+
+  footer {
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const Container = styled.div`

@@ -7,6 +7,7 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 import NotFound from '../NotFound';
 import TimeLineItem from '../../components/TimeLineItem';
+import Footer from '../../components/Footer';
 
 import { Scroll, Container } from './styles';
 
@@ -73,6 +74,8 @@ const Timeline: React.FC = () => {
             />
           ))}
         </Container>
+
+        <Footer />
       </Scroll>
     );
   }

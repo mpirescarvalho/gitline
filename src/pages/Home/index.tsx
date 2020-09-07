@@ -4,6 +4,7 @@ import { analytics } from 'firebase/app';
 
 import { useLogPageView } from '../../hooks/analytics';
 import SearchBox from '../../components/SearchBox';
+import Footer from '../../components/Footer';
 
 import { Container, AutoCompleteItem } from './styles';
 
@@ -69,8 +70,8 @@ const SearchPage: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <Container>
+    <Container>
+      <div>
         <h1>Gitline</h1>
         <SearchBox<User>
           placeholder="username..."
@@ -85,8 +86,10 @@ const SearchPage: React.FC = () => {
             </AutoCompleteItem>
           )}
         />
-      </Container>
-    </>
+      </div>
+
+      <Footer />
+    </Container>
   );
 };
 
