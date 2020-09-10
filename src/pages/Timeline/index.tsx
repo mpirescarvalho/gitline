@@ -47,6 +47,8 @@ const Timeline: React.FC = () => {
   useEffect(() => {
     (async () => {
       try {
+        setLoading(true);
+
         const userResponse = await fetch(
           `https://api.github.com/users/${username}`
         );
@@ -56,6 +58,7 @@ const Timeline: React.FC = () => {
         }
 
         setUser(await userResponse.json());
+        setNotFound(false);
 
         try {
           const response = await fetch(

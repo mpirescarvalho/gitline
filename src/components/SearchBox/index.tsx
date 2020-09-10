@@ -38,9 +38,9 @@ const SearchBox = () => {
         item_list_id: user.id.toString(),
         item_list_name: user.login,
       });
-      history.push(`timeline/${user.login}`);
+      history.push(`/timeline/${user.login}`);
     } else if (user !== '') {
-      history.push(`timeline/${user}`);
+      history.push(`/timeline/${user}`);
     }
   }
 

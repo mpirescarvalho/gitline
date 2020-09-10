@@ -8,19 +8,43 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
 
-  font-family: 'Russo One', sans-serif;
+  header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
 
-  h1 {
-    color: var(--text-primary-in-background);
-    font-size: 90px;
+    > div {
+      width: 300px;
+
+      @media (max-width: 550px) {
+        width: 100%;
+      }
+    }
   }
 
-  h2 {
-    color: var(--text-secondary-in-background);
-    font-size: 46px;
-    text-align: center;
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Russo One', sans-serif;
+
+    h1 {
+      color: var(--text-primary-in-background);
+      font-size: 90px;
+      text-align: center;
+    }
+
+    h2 {
+      color: var(--text-secondary-in-background);
+      font-size: 46px;
+      text-align: center;
+    }
   }
 `;
