@@ -13,7 +13,12 @@ export const Container = styled.div`
 `;
 
 export const ContainerRepos = styled.div`
+  width: 100%;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
 
   position: relative;
 
@@ -39,13 +44,12 @@ export const Line = styled.div`
   background: var(--background);
   background: linear-gradient(
     180deg,
-    var(--background) 1%,
-    var(--box-secondary) 5%,
-    var(--box-secondary) 95%,
-    var(--background) 99%
+    var(--box-secondary) 0,
+    var(--box-secondary) calc(100% - 120px),
+    var(--background) calc(100% - 10px)
   );
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     left: 10%;
   }
 `;

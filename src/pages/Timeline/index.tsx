@@ -6,19 +6,21 @@ import { useLogPageView } from '../../hooks/analytics';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 import NotFound from '../NotFound';
-import TimeLineItem from '../../components/TimeLineItem';
+import TimelineItem from '../../components/TimelineItem';
 import TimelineUser from '../../components/TimelineUser';
 import Footer from '../../components/Footer';
 
-import { formatRepoDate } from '../../utils';
-
 import { Container, ContainerNoRepo, Line, ContainerRepos } from './styles';
 
-interface Repo {
+export interface Repo {
   name: string;
   description: string;
   created_at: Date;
   html_url: string;
+  pushed_at: Date;
+  language: string;
+  stargazers_count: number;
+  forks_count: number;
 }
 
 export interface User {
@@ -95,13 +97,10 @@ const Timeline: React.FC = () => {
           <Line />
 
           {repos.map((repo, index) => (
-            <TimeLineItem
+            <TimelineItem
               key={index}
               position={index % 2 === 0 || isMobile ? 'right' : 'left'}
-              date={formatRepoDate(repo.created_at)}
-              name={repo.name}
-              description={repo.description}
-              url={repo.html_url}
+              repo={repo}
             />
           ))}
 

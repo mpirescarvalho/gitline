@@ -18,7 +18,7 @@ export const Container = styled.div`
   padding-bottom: 18px;
   position: relative;
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     width: 90%;
   }
 
@@ -62,7 +62,7 @@ export const Container = styled.div`
     color: var(--text-primary);
     margin-top: 8px;
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       width: 80%;
     }
   }
