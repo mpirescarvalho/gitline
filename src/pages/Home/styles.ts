@@ -19,7 +19,8 @@ export const Container = styled.div`
     font-family: 'Russo One', sans-serif;
     font-size: 96px;
     margin-bottom: 3px;
-    color: var(--text-primary-in-background);
+    transition: color 0.4s;
+    color: ${props => props.theme.colors.textPrimaryInBackground};
   }
 
   > div {

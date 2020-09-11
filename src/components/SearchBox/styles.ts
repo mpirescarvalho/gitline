@@ -4,10 +4,11 @@ export const Wrapper = styled.div`
   width: 90%;
   max-width: 550px;
 
-  background: var(--box);
+  transition: background-color 0.4s;
+  background: ${props => props.theme.colors.box};
 
   border-radius: 4px;
-  border: 1px solid var(--border);
+  border: 1px solid ${props => props.theme.colors.border};
 
   z-index: 20;
 `;
@@ -31,13 +32,13 @@ export const ContainerInput = styled.form`
     border: 0;
 
     padding: 0 16px;
-    color: var(--text-primary);
+    color: ${props => props.theme.colors.textPrimary};
   }
 
   button {
     width: 42px;
     height: 42px;
-    background: var(--primary);
+    background: ${props => props.theme.colors.primary};
     border: 0;
     border-radius: 4px;
     margin-right: 4px;
@@ -47,7 +48,7 @@ export const ContainerInput = styled.form`
     transition: all 0.2s;
 
     &:hover {
-      background: var(--primary-darker);
+      background: ${props => props.theme.colors.primaryDark};
     }
   }
 `;
@@ -57,7 +58,7 @@ export const LoadingContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 50px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid ${props => props.theme.colors.border};
   padding-top: 6px;
 `;
 

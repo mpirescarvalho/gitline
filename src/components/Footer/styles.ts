@@ -2,15 +2,15 @@ import styled from 'styled-components';
 
 export const Container = styled.footer`
   > span {
-    color: var(--text-primary-in-background);
+    color: ${props => props.theme.colors.textPrimaryInBackground};
 
     a {
       text-decoration: none;
-      color: var(--secondary);
+      color: ${props => props.theme.colors.secondary};
       transition: color 0.2s;
 
       &:hover {
-        color: var(--secondary-darker);
+        color: ${props => props.theme.colors.secondaryDark};
       }
     }
   }

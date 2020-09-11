@@ -4,7 +4,7 @@ export const Container = styled.div`
   border-radius: 4px;
   line-height: 50px;
 
-  border: 1px solid var(--border);
+  border: 1px solid ${props => props.theme.colors.border};
   cursor: pointer;
   user-select: none;
 
@@ -17,23 +17,23 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background: var(--box);
+    background: ${props => props.theme.colors.box};
     transition: all 0.3s;
 
-    color: var(--text-secondary);
+    color: ${props => props.theme.colors.textSecondary};
 
     + div {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid ${props => props.theme.colors.border};
 
       &:hover {
-        background: var(--box-secondary);
+        background: ${props => props.theme.colors.boxSecondary};
       }
     }
 
     /* select item text */
     > div > span {
       margin-left: 5px;
-      color: var(--text-primary);
+      color: ${props => props.theme.colors.textPrimary};
     }
 
     /* dropdown icon */

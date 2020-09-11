@@ -21,30 +21,11 @@ export default createGlobalStyle`
     list-style: none;
   }
 
-  :root {
-    --primary: #9B1768;
-    --primary-darker: #931562;
-    --secondary: #087392;
-    --secondary-darker: #05566e;
-
-    --border: #C4C4C4;
-    --background: #1B1B1B;
-
-    --box: #FFFFFF;
-    --box-secondary: #DADADA;
-    --box-in-secondary: #F1F1F1;
-
-    --text-primary: #4F4F4F;
-    --text-secondary: #8E8E8E;
-    --text-primary-in-background: #FFF;
-    --text-secondary-in-background: #DADADA;
-    --text-in-secondary: #CBCBCB;
-  }
-
   body {
     -webkit-font-smoothing: antialiased;
 
-    background: var(--background);
+    transition: background-color 0.4s;
+    background: ${props => props.theme.colors.background};
     min-width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;

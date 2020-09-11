@@ -5,6 +5,8 @@ import 'firebase/analytics';
 import Routes from './routes';
 import GlobalStyles from './styles/global';
 
+import { ThemeProvider } from './hooks/useTheme';
+
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -36,10 +38,10 @@ function App() {
   }, []);
 
   return (
-    <>
+    <ThemeProvider>
       {!loading && <Routes />}
       <GlobalStyles />
-    </>
+    </ThemeProvider>
   );
 }
 

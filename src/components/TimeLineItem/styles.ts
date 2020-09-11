@@ -48,7 +48,8 @@ export const TimelinePoint = styled(motion.div)<ColorProp>`
   left: 50%;
   margin-left: -23px;
   border-radius: 50%;
-  background: var(--box);
+  transition: background-color 0.4s;
+  background: ${props => props.theme.colors.box};
   border: 4px solid ${props => props.color};
 
   @media (max-width: 700px) {
@@ -66,15 +67,11 @@ export const Arrow = styled.div`
   box-sizing: content-box;
   width: 11px;
   height: 11px;
-  background: var(--box);
+  background: ${props => props.theme.colors.box};
   margin-top: 28px;
-  border-top: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  z-index: 5;
-
-  @media (max-width: 480px) {
-    margin-top: 20px;
-  }
+  border-top: 1px solid ${props => props.theme.colors.border};
+  border-right: 1px solid ${props => props.theme.colors.border};
+  transition: background-color 0.4s;
 
   &.right {
     margin-right: -6px;
@@ -108,7 +105,8 @@ export const Content = styled(motion.div)`
 export const Item = styled.div`
   width: 100%;
   padding: 20px 20px 15px 20px;
-  background: var(--box);
+  background: ${props => props.theme.colors.box};
+  transition: background-color 0.4s;
 
   display: flex;
   flex-direction: column;
@@ -117,7 +115,7 @@ export const Item = styled.div`
   gap: 24px;
 
   border-radius: 4px;
-  border: 1px solid var(--border);
+  border: 1px solid ${props => props.theme.colors.border};
   box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
 
   @media (max-width: 700px) {
@@ -137,8 +135,8 @@ export const Date = styled.time<ColorProp>`
   font-size: 14px;
   color: ${props =>
     props.colorType === 'light'
-      ? 'var(--text-primary)'
-      : 'var(--text-primary-in-background)'};
+      ? props.theme.colors.textPrimary
+      : props.theme.colors.textPrimaryInBackground};
   background: ${props => props.color};
   padding: 6px 9px;
   border-top-right-radius: 2px;
@@ -150,12 +148,12 @@ export const Name = styled.a`
   font-weight: bold;
   font-size: 18px;
   line-height: 20px;
-  color: var(--text-primary);
+  color: ${props => props.theme.colors.textPrimary};
   word-wrap: break-word;
   text-decoration: none;
   transition: color 0.2s;
   &:hover {
-    color: var(--secondary);
+    color: ${props => props.theme.colors.secondary};
   }
 `;
 
@@ -164,12 +162,14 @@ export const Description = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 18px;
-  color: var(--text-secondary);
+  color: ${props => props.theme.colors.textSecondary};
+  transition: color 0.2s;
 `;
 
 export const Footer = styled.div`
   align-self: stretch;
-  color: var(--text-primary);
+  color: ${props => props.theme.colors.textPrimary};
+  transition: color 0.2s;
   font-size: 12px;
 
   display: flex;
