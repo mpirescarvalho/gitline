@@ -61,6 +61,7 @@ export const TimelinePoint = styled(motion.div)<ColorProp>`
   @media (max-width: 480px) {
     width: 32px;
     height: 32px;
+    margin-top: 18px;
     margin-left: -15px;
   }
 `;

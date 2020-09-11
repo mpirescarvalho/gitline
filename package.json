@@ -16,6 +16,7 @@
     "firebase": "^7.19.1",
     "framer-motion": "^2.6.6",
     "react": "^16.13.1",
+    "react-dark-mode-toggle": "^0.0.9",
     "react-debounce-input": "^3.2.2",
     "react-dom": "^16.13.1",
     "react-icons": "^3.11.0",

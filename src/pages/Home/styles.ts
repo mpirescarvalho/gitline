@@ -20,7 +20,7 @@ export const Container = styled.div`
     font-size: 96px;
     margin-bottom: 3px;
     transition: color 0.4s;
-    color: ${props => props.theme.colors.textPrimaryInBackground};
+    color: #fff;
   }
 
   > div {

@@ -25,12 +25,20 @@ export const Container = styled.div`
     width: 90%;
   }
 
+  /* theme toggle button */
+  > div {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
   img {
     width: 100px;
     height: 100px;
     transition: border-color 0.4s;
     border: 4px solid ${props => props.theme.colors.box};
     background: ${props => props.theme.colors.box};
+    box-shadow: 0px -4px 3px -3px rgba(0, 0, 0, 0.2);
     border-radius: 50px;
     margin-top: -50px;
     position: absolute;
