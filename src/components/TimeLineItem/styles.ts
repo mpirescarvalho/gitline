@@ -52,6 +52,8 @@ export const TimelinePoint = styled(motion.div)<ColorProp>`
   background: ${props => props.theme.colors.box};
   border: 4px solid ${props => props.color};
 
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
+
   @media (max-width: 700px) {
     left: 10%;
   }
@@ -69,18 +71,17 @@ export const Arrow = styled.div`
   height: 11px;
   background: ${props => props.theme.colors.box};
   margin-top: 28px;
-  border-top: 1px solid ${props => props.theme.colors.border};
-  border-right: 1px solid ${props => props.theme.colors.border};
   transition: background-color 0.4s;
 
   &.right {
     margin-right: -6px;
+    box-shadow: 1px -2px 3px -1px rgba(0, 0, 0, 0.2);
     transform: rotateZ(225deg);
   }
 
   &.left {
     margin-left: -6px;
-    box-shadow: 2px -1px 1px -1px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px -2px 5px -1px rgba(0, 0, 0, 0.2);
     transform: rotateZ(45deg);
   }
 `;
@@ -115,8 +116,7 @@ export const Item = styled.div`
   gap: 24px;
 
   border-radius: 4px;
-  border: 1px solid ${props => props.theme.colors.border};
-  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
 
   @media (max-width: 700px) {
     flex: 1;
@@ -133,10 +133,7 @@ export const ItemText = styled.div`
 export const Date = styled.time<ColorProp>`
   font-family: 'Russo One', sans-serif;
   font-size: 14px;
-  color: ${props =>
-    props.colorType === 'light'
-      ? props.theme.colors.textPrimary
-      : props.theme.colors.textPrimaryInBackground};
+  color: ${props => (props.colorType === 'light' ? '#222' : '#fff')};
   background: ${props => props.color};
   padding: 6px 9px;
   border-top-right-radius: 2px;

@@ -122,14 +122,16 @@ const Timeline: React.FC = () => {
         <div>
           <SearchBox />
         </div>
-        <Dropdown
-          items={languages}
-          selected={language}
-          prefix="Language:"
-          onItemSelected={item => {
-            history.push(`/timeline/${username}?lang=${item}`);
-          }}
-        />
+        <div>
+          <Dropdown
+            items={languages}
+            selected={language}
+            prefix="Language:"
+            onItemSelected={item => {
+              history.push(`/timeline/${username}?lang=${item}`);
+            }}
+          />
+        </div>
       </header>
 
       <TimelineUser user={user} />

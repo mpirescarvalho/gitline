@@ -2,6 +2,8 @@ import React from 'react';
 
 import { User } from '../../pages/Timeline';
 
+import useTheme from '../../hooks/useTheme';
+
 import { Container } from './styles';
 
 interface TimelineUserProps {
@@ -9,9 +11,11 @@ interface TimelineUserProps {
 }
 
 const TimelineUser: React.FC<TimelineUserProps> = ({ user }) => {
+  const [, toggleTheme] = useTheme();
+
   return (
     <Container>
-      <img src={user.avatar_url} alt={user.name} />
+      <img onClick={toggleTheme} src={user.avatar_url} alt={user.name} />
       <h1>
         <a href={user.html_url} target="_blank">
           {user.name}

@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useCallback } from 'react';
 import {
   ThemeProvider as StyledThemeProvider,
   DefaultTheme,
@@ -7,18 +7,23 @@ import {
 import usePersistedState from './usePersistedState';
 
 import dark from '../styles/themes/dark';
+import light from '../styles/themes/light';
 
-type Response<T> = [T, React.Dispatch<React.SetStateAction<T>>];
+type Response<T> = [T, () => void];
 
 const ThemeContext = createContext<Response<DefaultTheme>>(
   {} as Response<DefaultTheme>
 );
 
 export const ThemeProvider: React.FC = ({ children }) => {
-  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', dark);
+  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(theme.title === 'light' ? dark : light);
+  }, [theme, setTheme]);
 
   return (
-    <ThemeContext.Provider value={[theme, setTheme]}>
+    <ThemeContext.Provider value={[theme, toggleTheme]}>
       <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   );

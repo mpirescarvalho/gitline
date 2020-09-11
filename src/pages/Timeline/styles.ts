@@ -45,6 +45,8 @@ export const Container = styled.div`
 
       /* filter */
       &:last-child {
+        height: 50px;
+        z-index: 20;
       }
     }
 

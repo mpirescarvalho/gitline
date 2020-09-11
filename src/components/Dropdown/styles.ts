@@ -4,11 +4,14 @@ export const Container = styled.div`
   border-radius: 4px;
   line-height: 50px;
 
-  border: 1px solid ${props => props.theme.colors.border};
   cursor: pointer;
   user-select: none;
 
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
+
   z-index: 20;
+
+  overflow: hidden;
 
   /* item */
   > div {

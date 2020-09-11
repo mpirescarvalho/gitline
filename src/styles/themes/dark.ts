@@ -8,15 +8,15 @@ export default {
     secondary: '#087392',
     secondaryDark: '#05566e',
 
-    border: '#C4C4C4',
+    border: '#2b2b2b',
     background: '#1B1B1B',
 
-    box: '#FFFFFF',
-    boxSecondary: '#DADADA',
+    box: '#333',
+    boxSecondary: '#525252',
     boxInSecondary: '#F1F1F1',
 
-    textPrimary: '#4F4F4F',
-    textSecondary: '#8E8E8E',
+    textPrimary: '#FFF',
+    textSecondary: '#DADADA',
 
     textPrimaryInBackground: '#FFF',
     textSecondaryInBackground: '#DADADA',

@@ -19,6 +19,8 @@ export const Container = styled.div`
   padding-bottom: 18px;
   position: relative;
 
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
+
   @media (max-width: 700px) {
     width: 90%;
   }
