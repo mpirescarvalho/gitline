@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { useLogPageView } from '../../hooks/analytics';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
@@ -12,6 +12,7 @@ import SearchBox from '../../components/SearchBox';
 import Dropdown from '../../components/Dropdown';
 
 import { Container, ContainerNoRepo, Line, ContainerRepos } from './styles';
+import useLangFilter from '../../hooks/useLangFilter';
 
 export interface Repo {
   name: string;
@@ -43,11 +44,12 @@ const Timeline: React.FC = () => {
   const { width } = useWindowDimensions();
   const isMobile = useMemo(() => width <= 600, [width]);
 
-  const [language, setLanguage] = useState('All');
+  const language = useLangFilter();
+
   const languages = useMemo(() => {
     const array = ['All'];
     repos?.forEach(repo => {
-      if (!array.includes(repo.language)) {
+      if (repo.language && !array.includes(repo.language)) {
         array.push(repo.language);
       }
     });
@@ -62,6 +64,8 @@ const Timeline: React.FC = () => {
       ),
     [repos, language]
   );
+
+  const history = useHistory();
 
   useLogPageView('home_page');
 
@@ -122,7 +126,9 @@ const Timeline: React.FC = () => {
           items={languages}
           selected={language}
           prefix="Language:"
-          onItemSelected={setLanguage}
+          onItemSelected={item => {
+            history.push(`/timeline/${username}?lang=${item}`);
+          }}
         />
       </header>
 
