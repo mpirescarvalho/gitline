@@ -9,6 +9,7 @@ import TimelineItem from '../../components/TimelineItem';
 import TimelineUser from '../../components/TimelineUser';
 import Footer from '../../components/Footer';
 import SearchBox from '../../components/SearchBox';
+import Dropdown from '../../components/Dropdown';
 
 import { Container, ContainerNoRepo, Line, ContainerRepos } from './styles';
 
@@ -41,6 +42,26 @@ const Timeline: React.FC = () => {
   const { username } = useParams();
   const { width } = useWindowDimensions();
   const isMobile = useMemo(() => width <= 600, [width]);
+
+  const [language, setLanguage] = useState('All');
+  const languages = useMemo(() => {
+    const array = ['All'];
+    repos?.forEach(repo => {
+      if (!array.includes(repo.language)) {
+        array.push(repo.language);
+      }
+    });
+    return array;
+  }, [repos]);
+
+  const filteredRepos = useMemo(
+    () =>
+      repos?.filter(
+        repo =>
+          repo.language === (language === 'All' ? repo.language : language)
+      ),
+    [repos, language]
+  );
 
   useLogPageView('home_page');
 
@@ -94,16 +115,22 @@ const Timeline: React.FC = () => {
   return (
     <Container>
       <header>
+        <Dropdown
+          items={languages}
+          selected={language}
+          prefix="Language:"
+          onItemSelected={setLanguage}
+        />
         <SearchBox />
       </header>
 
       <TimelineUser user={user} />
 
-      {repos && repos.length > 0 ? (
+      {filteredRepos && filteredRepos.length > 0 ? (
         <ContainerRepos>
           <Line />
 
-          {repos.map((repo, index) => (
+          {filteredRepos.map((repo, index) => (
             <TimelineItem
               key={index}
               position={index % 2 === 0 || isMobile ? 'right' : 'left'}
@@ -115,7 +142,11 @@ const Timeline: React.FC = () => {
         </ContainerRepos>
       ) : (
         <ContainerNoRepo>
-          <p>{username} doesn’t have any public repositories yet.</p>
+          <p>
+            {repos && repos.length > 0
+              ? 'No matches found for this filter'
+              : `${username} doesn’t have any public repositories yet.`}
+          </p>
           <Footer />
         </ContainerNoRepo>
       )}
