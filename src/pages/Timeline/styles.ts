@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100vw;
   min-height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   background: var(--background);
 
@@ -10,6 +12,30 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
+  header {
+    position: relative;
+    width: 100%;
+    margin-bottom: 80px;
+
+    > div {
+      position: absolute;
+      width: 300px;
+      top: 20px;
+      right: 20px;
+      z-index: 20;
+
+      @media (max-width: 550px) {
+        right: 20px !important;
+        left: 20px !important;
+        width: unset;
+      }
+    }
+
+    @media (max-width: 550px) {
+      margin-bottom: 100px;
+    }
+  }
 `;
 
 export const ContainerRepos = styled.div`

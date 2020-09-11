@@ -4,7 +4,7 @@ import { DebounceInput } from 'react-debounce-input';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { useHistory } from 'react-router-dom';
 
-import { analytics } from 'firebase';
+import { analytics } from 'firebase/app';
 
 import AutoCompleteItem from '../../components/AutoCompleteItem';
 

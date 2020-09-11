@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { analytics } from 'firebase/app';
 
 import { useLogPageView } from '../../hooks/analytics';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
@@ -9,6 +8,7 @@ import NotFound from '../NotFound';
 import TimelineItem from '../../components/TimelineItem';
 import TimelineUser from '../../components/TimelineUser';
 import Footer from '../../components/Footer';
+import SearchBox from '../../components/SearchBox';
 
 import { Container, ContainerNoRepo, Line, ContainerRepos } from './styles';
 
@@ -93,6 +93,10 @@ const Timeline: React.FC = () => {
 
   return (
     <Container>
+      <header>
+        <SearchBox />
+      </header>
+
       <TimelineUser user={user} />
 
       {repos && repos.length > 0 ? (
