@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom';
 
 import { analytics } from 'firebase/app';
 
+import useOutsideClick from '../../hooks/useOutsideClick';
+
 import AutoCompleteItem from '../../components/AutoCompleteItem';
 
 import {
@@ -26,9 +28,12 @@ interface User {
 const SearchBox = () => {
   const [value, setValue] = useState<string>('');
   const [activeItem, setActiveItem] = useState(0);
+  const [focused, setFocused] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [autoCompleteItems, setAutoCompleteItems] = useState<User[]>([]);
+
+  const wrapperRef = useOutsideClick<HTMLDivElement>(() => setFocused(false));
 
   const history = useHistory();
 
@@ -115,7 +120,7 @@ const SearchBox = () => {
   }
 
   return (
-    <Wrapper onKeyDown={handleKeyDown} tabIndex={0}>
+    <Wrapper ref={wrapperRef} onKeyDown={handleKeyDown} tabIndex={0}>
       <ContainerInput onSubmit={handleSubmit}>
         <DebounceInput
           value={value}
@@ -124,6 +129,7 @@ const SearchBox = () => {
           placeholder="username..."
           debounceTimeout={800}
           minLength={0}
+          onFocus={() => setFocused(true)}
         />
 
         <button type="submit">
@@ -136,7 +142,8 @@ const SearchBox = () => {
           <PulseLoader size={8} color="#9B1768" />
         </LoadingContainer>
       ) : (
-        autoCompleteItems && (
+        autoCompleteItems &&
+        focused && (
           <div>
             {autoCompleteItems.map((item, index) => (
               <ItemContainer
