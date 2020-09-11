@@ -8,11 +8,14 @@ export const Container = styled.div`
   cursor: pointer;
   user-select: none;
 
+  z-index: 20;
+
   /* item */
   > div {
     height: 50px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 16px;
     background: var(--box);
     transition: all 0.3s;
@@ -28,7 +31,7 @@ export const Container = styled.div`
     }
 
     /* select item text */
-    > span {
+    > div > span {
       margin-left: 5px;
       color: var(--text-primary);
     }

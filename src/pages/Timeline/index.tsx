@@ -115,13 +115,15 @@ const Timeline: React.FC = () => {
   return (
     <Container>
       <header>
+        <div>
+          <SearchBox />
+        </div>
         <Dropdown
           items={languages}
           selected={language}
           prefix="Language:"
           onItemSelected={setLanguage}
         />
-        <SearchBox />
       </header>
 
       <TimelineUser user={user} />

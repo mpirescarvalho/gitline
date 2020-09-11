@@ -8,6 +8,8 @@ export const Wrapper = styled.div`
 
   border-radius: 4px;
   border: 1px solid var(--border);
+
+  z-index: 20;
 `;
 
 export const ContainerInput = styled.form`

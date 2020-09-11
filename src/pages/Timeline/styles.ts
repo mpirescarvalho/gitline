@@ -15,39 +15,46 @@ export const Container = styled.div`
 
   header {
     width: 100%;
+    height: 90px;
     padding: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-between;
     align-items: flex-start;
-  }
 
-  /* header {
-    position: relative;
-    width: 100%;
-    margin-bottom: 80px;
-    border: 1px solid red;
-    height: 50px;
+    overflow-y: visible;
 
     > div {
-      position: absolute;
-      width: 300px;
-      top: 20px;
-      right: 20px;
-      z-index: 20;
+      /* search box */
+      &:first-child {
+        height: 50px;
+        z-index: 25;
 
-      @media (max-width: 550px) {
-        right: 20px !important;
-        left: 20px !important;
-        width: unset;
+        > div {
+          width: 300px;
+
+          @media (max-width: 700px) {
+            width: unset;
+            max-width: unset;
+          }
+        }
+      }
+
+      /* filter */
+      &:last-child {
       }
     }
 
-    @media (max-width: 550px) {
-      margin-bottom: 100px;
+    @media (max-width: 700px) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: 15px;
+      height: 160px;
     }
-  } */
+  }
 `;
 
 export const ContainerRepos = styled.div`

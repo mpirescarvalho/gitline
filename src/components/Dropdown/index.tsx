@@ -29,8 +29,10 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <Container ref={ref}>
       <div onClick={() => setOpen(!open)}>
-        {prefix}
-        <span>{selected}</span>
+        <div>
+          {prefix}
+          <span>{selected}</span>
+        </div>
         <FaCaretDown />
       </div>
       {open &&
