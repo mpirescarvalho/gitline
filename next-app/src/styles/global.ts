@@ -25,7 +25,7 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
 
     transition: background-color 0.4s;
-    background: #151515;
+    background: ${props => props.theme.colors.background};
     min-width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;
