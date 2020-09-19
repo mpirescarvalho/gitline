@@ -3,6 +3,7 @@ import { MdSearch } from 'react-icons/md';
 import { DebounceInput } from 'react-debounce-input';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 // import { analytics } from 'firebase/app';
 
@@ -44,6 +45,7 @@ const SearchBox = () => {
       //   item_list_id: user.id.toString(),
       //   item_list_name: user.login,
       // });
+
       router.push(`/timeline/${user.login}`);
     } else if (user !== '') {
       router.push(`/timeline/${user}`);
@@ -155,11 +157,15 @@ const SearchBox = () => {
                 onMouseEnter={() => handleItemMouseMove(index)}
                 onClick={() => handleGoToTimeline(item)}
               >
-                <AutoCompleteItem
-                  className={`${index === activeItem && 'active'}`}
-                >
-                  {item.login}
-                </AutoCompleteItem>
+                <Link href={`/timeline/${item.login}`}>
+                  <a>
+                    <AutoCompleteItem
+                      className={`${index === activeItem && 'active'}`}
+                    >
+                      {item.login}
+                    </AutoCompleteItem>
+                  </a>
+                </Link>
               </ItemContainer>
             ))}
           </div>

@@ -70,4 +70,7 @@ export const LoadingContainer = styled.div`
 
 export const ItemContainer = styled.div`
   cursor: pointer;
+  a {
+    text-decoration: none;
+  }
 `;

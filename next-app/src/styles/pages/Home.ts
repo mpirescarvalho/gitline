@@ -32,5 +32,9 @@ export const Container = styled.div`
 
   footer {
     margin-bottom: 20px;
+
+    span {
+      color: #fff;
+    }
   }
 `;
