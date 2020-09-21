@@ -157,7 +157,7 @@ const SearchBox = () => {
                 onMouseEnter={() => handleItemMouseMove(index)}
                 onClick={() => handleGoToTimeline(item)}
               >
-                <Link href={`/timeline/${item.login}`}>
+                <Link href={`/timeline/${item.login}`} prefetch={false}>
                   <a>
                     <AutoCompleteItem
                       className={`${index === activeItem && 'active'}`}

@@ -4,7 +4,7 @@ import { BiGitRepoForked } from 'react-icons/bi';
 
 import useVisibility from '../../hooks/useVisibility';
 
-import { Repo } from '../../pages/Timeline';
+import { Repo } from '../../pages/timeline/[username]';
 import {
   formatRepoDate,
   formatLastUpdateDate,

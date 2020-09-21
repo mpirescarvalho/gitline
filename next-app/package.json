@@ -13,10 +13,13 @@
     "deploy": "npm run build && firebase deploy"
   },
   "dependencies": {
+    "date-fns": "^2.16.1",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
+    "framer-motion": "^2.6.15",
     "next": "9.5.3",
     "react": "16.13.1",
+    "react-dark-mode-toggle": "^0.0.9",
     "react-debounce-input": "^3.2.2",
     "react-dom": "16.13.1",
     "react-icons": "^3.11.0",

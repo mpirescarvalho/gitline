@@ -8,7 +8,7 @@ import SearchBox from '../components/SearchBox';
 import { Container } from '../styles/pages/404';
 
 interface NotFoundProps {
-  user: boolean;
+  user?: boolean;
 }
 
 const NotFound: React.FC<NotFoundProps> = ({ user }) => {

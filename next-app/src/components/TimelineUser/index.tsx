@@ -1,10 +1,9 @@
 import React from 'react';
 import DarkModeToggle from 'react-dark-mode-toggle';
 
-import { User } from '../../pages/Timeline';
+import { User } from '../../pages/timeline/[username]';
 
 import useTheme from '../../hooks/useTheme';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 import { Container } from './styles';
 
@@ -15,7 +14,7 @@ interface TimelineUserProps {
 const TimelineUser: React.FC<TimelineUserProps> = ({ user }) => {
   const [theme, toggleTheme] = useTheme();
 
-  const { width } = useWindowDimensions();
+  //TODO: toggle responsivity
 
   return (
     <Container>
@@ -23,7 +22,7 @@ const TimelineUser: React.FC<TimelineUserProps> = ({ user }) => {
         <DarkModeToggle
           onChange={toggleTheme}
           checked={theme.title === 'dark'}
-          size={width > 700 ? 65 : 50}
+          size={800 > 700 ? 65 : 50}
         />
       </div>
       <img src={user.avatar_url} alt={user.name} />
