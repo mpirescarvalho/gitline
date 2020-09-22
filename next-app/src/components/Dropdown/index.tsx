@@ -38,6 +38,7 @@ const Dropdown: React.FC<DropdownProps> = ({ items, selected, prefix }) => {
             <Link
               key={index}
               href={`/timeline/${router.query.username}?lang=${item}`}
+              prefetch={false}
               shallow
             >
               <a>

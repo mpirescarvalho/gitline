@@ -80,3 +80,11 @@ export function formatNumber(num: number) {
   const digits = num > 999 && num <= 99999 ? 1 : 0;
   return formatNumberFloat(num, digits);
 }
+
+export async function authFetch(uri: string): Promise<Response> {
+  return await fetch(uri, {
+    headers: new Headers({
+      Authorization: `token ${process.env.API_TOKEN}`,
+    }),
+  });
+}

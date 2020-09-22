@@ -6,6 +6,7 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import useLangFilter from '../../hooks/useLangFilter';
 import { useLogPageView } from '../../hooks/analytics';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import { authFetch } from '../../utils';
 
 import NotFound from '../404';
 import TimelineItem from '../../components/TimelineItem';
@@ -62,7 +63,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const username = params.username;
 
-  const userResponse = await fetch(`https://api.github.com/users/${username}`);
+  const userResponse = await authFetch(
+    `https://api.github.com/users/${username}`
+  );
 
   rateExceeded = userResponse.status === 403;
 
@@ -87,7 +90,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   if (!rateExceeded) {
-    const response = await fetch(
+    const response = await authFetch(
       `https://api.github.com/users/${username}/repos?sort=created`
     );
 
