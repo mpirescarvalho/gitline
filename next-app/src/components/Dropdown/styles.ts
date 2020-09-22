@@ -13,8 +13,12 @@ export const Container = styled.div`
 
   overflow: hidden;
 
+  a {
+    text-decoration: none;
+  }
+
   /* item */
-  > div {
+  .item {
     height: 50px;
     display: flex;
     align-items: center;
@@ -25,14 +29,6 @@ export const Container = styled.div`
 
     color: ${props => props.theme.colors.textSecondary};
 
-    + div {
-      border-top: 1px solid ${props => props.theme.colors.border};
-
-      &:hover {
-        background: ${props => props.theme.colors.boxSecondary};
-      }
-    }
-
     /* select item text */
     > div > span {
       margin-left: 5px;
@@ -42,6 +38,16 @@ export const Container = styled.div`
     /* dropdown icon */
     svg {
       margin-left: 15px;
+    }
+  }
+
+  .dropdown {
+    .item {
+      border-top: 1px solid ${props => props.theme.colors.border};
+
+      &:hover {
+        background: ${props => props.theme.colors.boxSecondary};
+      }
     }
   }
 `;

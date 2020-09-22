@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaCaretDown } from 'react-icons/fa';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Container } from './styles';
 import useOutsideClick from '../../hooks/useOutsideClick';
@@ -8,39 +10,42 @@ interface DropdownProps {
   items: string[];
   selected: string;
   prefix: string;
-  onItemSelected: (item: string) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({
-  items,
-  selected,
-  prefix,
-  onItemSelected,
-}) => {
+const Dropdown: React.FC<DropdownProps> = ({ items, selected, prefix }) => {
   const [open, setOpen] = useState(false);
 
   const ref = useOutsideClick<HTMLDivElement>(() => setOpen(false));
 
-  function handleItemClick(item: string) {
-    setOpen(false);
-    onItemSelected(item);
-  }
+  const router = useRouter();
+
+  useEffect(() => setOpen(false), [router]);
+
+  //TODO: href generating console warning
 
   return (
     <Container ref={ref}>
-      <div onClick={() => setOpen(!open)}>
+      <div className="item" onClick={() => setOpen(!open)}>
         <div>
           {prefix}
           <span>{selected}</span>
         </div>
         <FaCaretDown />
       </div>
-      {open &&
-        items.map((item, index) => (
-          <div key={index} onClick={() => handleItemClick(item)}>
-            {item}
-          </div>
-        ))}
+      <div className="dropdown">
+        {open &&
+          items.map((item, index) => (
+            <Link
+              key={index}
+              href={`/timeline/${router.query.username}?lang=${item}`}
+              shallow
+            >
+              <a>
+                <div className="item">{item}</div>
+              </a>
+            </Link>
+          ))}
+      </div>
     </Container>
   );
 };

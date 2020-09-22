@@ -137,44 +137,37 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
-  // const [repos, setRepos] = useState<Repo[] | undefined>();
-  // const [user, setUser] = useState<User | undefined>();
-
-  // const { username } = useParams();
   // const { width } = useWindowDimensions();
   // const isMobile = useMemo(() => width <= 600, [width]);
 
-  // const language = useLangFilter();
+  const language = useLangFilter();
 
-  // const languages = useMemo(() => {
-  //   const array = ['All'];
-  //   repos?.forEach(repo => {
-  //     if (repo.language && !array.includes(repo.language)) {
-  //       array.push(repo.language);
-  //     }
-  //   });
-  //   return array;
-  // }, [repos]);
+  const languages = useMemo(() => {
+    const array = ['All'];
+    repos?.forEach(repo => {
+      if (repo.language && !array.includes(repo.language)) {
+        array.push(repo.language);
+      }
+    });
+    return array;
+  }, [repos]);
 
-  // const filteredRepos = useMemo(
-  //   () =>
-  //     repos?.filter(
-  //       repo =>
-  //         repo.language === (language === 'All' ? repo.language : language)
-  //     ),
-  //   [repos, language]
-  // );
+  const filteredRepos = useMemo(
+    () =>
+      repos?.filter(
+        repo =>
+          repo.language === (language === 'All' ? repo.language : language)
+      ),
+    [repos, language]
+  );
 
-  const filteredRepos = useMemo(() => repos, [repos]);
-
-  // const history = useHistory();
   const router = useRouter();
 
   //TODO: analytics
   // useLogPageView('home_page');
 
   //TODO: get github api key for server-server requests
-  //TODO: custom error page. use next erro?
+  //TODO: custom error page. use next error?
   if (rateExceeded) {
     return <div>Rate limit exceeded, try again later.</div>;
   }
@@ -198,14 +191,7 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
           <SearchBox />
         </div>
         <div>
-          {/* <Dropdown
-            items={languages}
-            selected={language}
-            prefix="Language:"
-            onItemSelected={item => {
-              history.push(`/timeline/${username}?lang=${item}`);
-            }}
-          /> */}
+          <Dropdown items={languages} selected={language} prefix="Language:" />
         </div>
       </header>
 
