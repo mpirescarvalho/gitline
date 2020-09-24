@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import MoonLoader from 'react-spinners/MoonLoader';
+import Error from 'next/error';
 import { motion } from 'framer-motion';
 
 import useLangFilter from '../../hooks/useLangFilter';
@@ -173,9 +174,10 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
   //TODO: analytics
   // useLogPageView('home_page');
 
-  //TODO: custom error page. use next error?
   if (rateExceeded) {
-    return <div>Rate limit exceeded, try again later.</div>;
+    return (
+      <Error statusCode={403} title="Rate limit exceeded, try again later" />
+    );
   }
 
   if (router.isFallback) {
