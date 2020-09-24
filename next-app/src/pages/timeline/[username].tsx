@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import MoonLoader from 'react-spinners/MoonLoader';
+import { motion } from 'framer-motion';
 
 import useLangFilter from '../../hooks/useLangFilter';
 import { useLogPageView } from '../../hooks/analytics';
@@ -192,19 +193,37 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
   return (
     <Container>
       <header>
-        <div>
+        <motion.div
+          initial={{ x: 20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{
+            ease: [0.24, 1.02, 0.66, 0.99],
+            duration: 1,
+          }}
+        >
           <SearchBox />
-        </div>
-        <div>
+        </motion.div>
+        <motion.div
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{
+            ease: [0.24, 1.02, 0.66, 0.99],
+            duration: 1,
+          }}
+        >
           <Dropdown items={languages} selected={language} prefix="Language:" />
-        </div>
+        </motion.div>
       </header>
 
       <TimelineUser user={user} />
 
       {filteredRepos && filteredRepos.length > 0 ? (
         <ContainerRepos>
-          <Line />
+          <Line
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ ease: [0.24, 1.02, 0.66, 0.99], duration: 1 }}
+          />
 
           {filteredRepos.map((repo, index) => (
             // <TimelineItem

@@ -1,5 +1,6 @@
 import React from 'react';
 import DarkModeToggle from 'react-dark-mode-toggle';
+import { motion } from 'framer-motion';
 
 import { User } from '../../pages/timeline/[username]';
 
@@ -16,17 +17,24 @@ const TimelineUser: React.FC<TimelineUserProps> = ({ user }) => {
 
   //TODO: toggle responsivity
 
-  //TODO: add more animations
-
   return (
-    <Container>
+    <Container
+      initial={{ y: -30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        ease: [0.24, 1.02, 0.66, 0.99],
+        duration: 1,
+      }}
+    >
       <div>
         {theme && (
-          <DarkModeToggle
-            onChange={toggleTheme}
-            checked={theme === 'dark'}
-            size={800 > 700 ? 65 : 50}
-          />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <DarkModeToggle
+              onChange={toggleTheme}
+              checked={theme === 'dark'}
+              size={65}
+            />
+          </motion.div>
         )}
       </div>
       <img src={user.avatar_url} alt={user.name} />

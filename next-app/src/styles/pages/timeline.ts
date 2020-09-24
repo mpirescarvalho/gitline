@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export const Container = styled.div`
   width: 100vw;
@@ -80,7 +81,7 @@ export const ContainerRepos = styled.div`
   }
 `;
 
-export const Line = styled.div`
+export const Line = styled(motion.div)`
   position: absolute;
   left: 50%;
   top: -140px;
