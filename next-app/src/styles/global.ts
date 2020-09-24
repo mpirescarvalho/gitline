@@ -31,4 +31,9 @@ export default createGlobalStyle`
     overflow-x: hidden;
   }
 
+  #nprogress .bar {
+    background: ${props => props.theme.colors.primary} !important;
+    height: 3px !important;
+  }
+
 `;

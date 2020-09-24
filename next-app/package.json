@@ -18,6 +18,7 @@
     "firebase-functions": "^3.11.0",
     "framer-motion": "^2.6.15",
     "next": "9.5.3",
+    "nprogress": "^0.2.0",
     "react": "16.13.1",
     "react-dark-mode-toggle": "^0.0.9",
     "react-debounce-input": "^3.2.2",
