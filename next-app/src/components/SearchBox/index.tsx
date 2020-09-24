@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { MdSearch } from 'react-icons/md';
 import { DebounceInput } from 'react-debounce-input';
 import PulseLoader from 'react-spinners/PulseLoader';
@@ -30,6 +30,7 @@ const SearchBox = () => {
   const [value, setValue] = useState<string>('');
   const [activeItem, setActiveItem] = useState(0);
   const [focused, setFocused] = useState(false);
+  const isRouting = useRef(false);
 
   const [loading, setLoading] = useState(false);
   const [autoCompleteItems, setAutoCompleteItems] = useState<User[]>([]);
@@ -66,8 +67,12 @@ const SearchBox = () => {
       )
         .then(response => response.json())
         .then((res: SearchResponse) => {
-          setLoading(false);
-          setAutoCompleteItems(res.items);
+          if (!isRouting.current) {
+            setLoading(false);
+            setAutoCompleteItems(res.items);
+          } else {
+            isRouting.current = false;
+          }
 
           //TODO: analytics
           // analytics().logEvent('view_search_results', {
@@ -95,6 +100,18 @@ const SearchBox = () => {
   useEffect(() => {
     setActiveItem(0);
   }, [autoCompleteItems]);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      isRouting.current = true;
+      setAutoCompleteItems([]);
+      setLoading(false);
+      setValue('');
+      wrapperRef.current.focus();
+    };
+    router.events.on('routeChangeStart', handleRouteChange);
+    return () => router.events.off('routeChangeStart', handleRouteChange);
+  }, []);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
