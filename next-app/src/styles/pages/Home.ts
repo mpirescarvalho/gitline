@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 100vh;
   overflow: hidden;
 
-  background: url('/images/background.png');
+  background: url('/images/background.jpg');
   background-size: cover;
 
   display: flex;
