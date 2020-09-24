@@ -24,6 +24,7 @@ import {
 } from '../../styles/pages/timeline';
 
 export interface Repo {
+  id: number;
   name: string;
   description: string;
   created_at: Date;
@@ -99,6 +100,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     if (response.status === 200) {
       repos = ((await response.json()) as Repo[]).map(
         ({
+          id,
           name,
           description,
           created_at,
@@ -108,6 +110,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           stargazers_count,
           forks_count,
         }) => ({
+          id,
           name,
           description,
           created_at,
@@ -210,7 +213,7 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
             //   repo={repo}
             // />
             <TimelineItem
-              key={index}
+              key={repo.id}
               position={index % 2 === 0 || false ? 'right' : 'left'}
               repo={repo}
             />

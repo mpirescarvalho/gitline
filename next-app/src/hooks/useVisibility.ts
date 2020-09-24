@@ -1,10 +1,10 @@
-import { createRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 export default function useVisibility<Element extends HTMLElement>(
   offset = 0
 ): [Boolean, React.RefObject<Element>] {
   const [isVisible, setIsVisible] = useState(false);
-  const currentElement = createRef<Element>();
+  const currentElement = useRef<Element>();
 
   const onScroll = () => {
     if (!currentElement.current) {
