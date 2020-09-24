@@ -16,12 +16,10 @@ export default function useVisibility<Element extends HTMLElement>(
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', onScroll);
-      onScroll();
-      return () => window.removeEventListener('scroll', onScroll);
-    }
-  });
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return [isVisible, currentElement];
 }

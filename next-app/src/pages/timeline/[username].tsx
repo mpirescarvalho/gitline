@@ -169,7 +169,6 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
   //TODO: analytics
   // useLogPageView('home_page');
 
-  //TODO: get github api key for server-server requests
   //TODO: custom error page. use next error?
   if (rateExceeded) {
     return <div>Rate limit exceeded, try again later.</div>;
