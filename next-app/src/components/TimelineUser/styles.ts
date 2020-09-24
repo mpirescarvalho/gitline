@@ -7,7 +7,7 @@ export const Container = styled.div`
   z-index: 15;
 
   transition: background-color 0.4s;
-  background: ${props => props.theme.colors.box};
+  background: var(--box);
   border-radius: 4px;
 
   display: flex;
@@ -36,8 +36,8 @@ export const Container = styled.div`
     width: 100px;
     height: 100px;
     transition: border-color 0.4s;
-    border: 4px solid ${props => props.theme.colors.box};
-    background: ${props => props.theme.colors.box};
+    border: 4px solid var(--box);
+    background: var(--box);
     box-shadow: 0px -4px 3px -3px rgba(0, 0, 0, 0.2);
     border-radius: 50px;
     margin-top: -50px;
@@ -51,18 +51,18 @@ export const Container = styled.div`
     font-weight: bold;
     font-size: 20px;
     line-height: 20px;
-    color: ${props => props.theme.colors.textPrimary};
+    color: var(--textPrimary);
     transition: color 0.3s;
 
     &:hover {
-      color: ${props => props.theme.colors.secondary};
+      color: var(--secondary);
     }
   }
 
   h2 {
     font-weight: 500;
     font-size: 16px;
-    color: ${props => props.theme.colors.textSecondary};
+    color: var(--textSecondary);
     transition: color 0.3s;
   }
 
@@ -73,7 +73,7 @@ export const Container = styled.div`
     line-height: 20px;
     text-align: center;
     transition: color 0.3s;
-    color: ${props => props.theme.colors.textPrimary};
+    color: var(--textPrimary);
     margin-top: 8px;
 
     @media (max-width: 700px) {

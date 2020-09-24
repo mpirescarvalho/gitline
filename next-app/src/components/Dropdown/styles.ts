@@ -24,15 +24,15 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background: ${props => props.theme.colors.box};
+    background: var(--box);
     transition: all 0.3s;
 
-    color: ${props => props.theme.colors.textSecondary};
+    color: var(--textSecondary);
 
     /* select item text */
     > div > span {
       margin-left: 5px;
-      color: ${props => props.theme.colors.textPrimary};
+      color: var(--textPrimary);
     }
 
     /* dropdown icon */
@@ -43,10 +43,10 @@ export const Container = styled.div`
 
   .dropdown {
     .item {
-      border-top: 1px solid ${props => props.theme.colors.border};
+      border-top: 1px solid var(--border);
 
       &:hover {
-        background: ${props => props.theme.colors.boxSecondary};
+        background: var(--boxSecondary);
       }
     }
   }

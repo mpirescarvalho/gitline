@@ -6,7 +6,7 @@ export const Container = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
 
-  background: ${props => props.theme.colors.background};
+  background: var(--background);
   transition: background-color 0.4s;
 
   display: flex;
@@ -89,12 +89,12 @@ export const Line = styled.div`
   height: 100%;
   margin-left: -3px;
 
-  background: ${props => props.theme.colors.background};
+  background: var(--background);
   background: linear-gradient(
     180deg,
-    ${props => props.theme.colors.boxSecondary} 0,
-    ${props => props.theme.colors.boxSecondary} calc(100% - 120px),
-    ${props => props.theme.colors.background} calc(100% - 10px)
+    var(--boxSecondary) 0,
+    var(--boxSecondary) calc(100% - 120px),
+    var(--background) calc(100% - 10px)
   );
 
   transition: background 0.2s;
@@ -120,7 +120,7 @@ export const ContainerNoRepo = styled.div`
     align-items: center;
 
     font-size: 18px;
-    color: ${props => props.theme.colors.textPrimaryInBackground};
+    color: var(--textPrimary);
     font-weight: bold;
 
     transition: color 0.2s;

@@ -16,14 +16,18 @@ const TimelineUser: React.FC<TimelineUserProps> = ({ user }) => {
 
   //TODO: toggle responsivity
 
+  //TODO: add more animations
+
   return (
     <Container>
       <div>
-        <DarkModeToggle
-          onChange={toggleTheme}
-          checked={theme.title === 'dark'}
-          size={800 > 700 ? 65 : 50}
-        />
+        {theme && (
+          <DarkModeToggle
+            onChange={toggleTheme}
+            checked={theme === 'dark'}
+            size={800 > 700 ? 65 : 50}
+          />
+        )}
       </div>
       <img src={user.avatar_url} alt={user.name} />
       <h1>

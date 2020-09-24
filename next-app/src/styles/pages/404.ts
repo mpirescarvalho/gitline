@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: ${props => props.theme.colors.background};
+  background: var(--background);
   transition: background-color 0.4s;
 
   display: flex;
@@ -37,14 +37,14 @@ export const Container = styled.div`
     font-family: 'Russo One', sans-serif;
 
     h1 {
-      color: ${props => props.theme.colors.textPrimaryInBackground};
+      color: var(--textPrimary);
       transition: color 0.2s;
       font-size: 90px;
       text-align: center;
     }
 
     h2 {
-      color: ${props => props.theme.colors.textSecondaryInBackground};
+      color: var(--textSecondary);
       transition: color 0.2s;
       font-size: 46px;
       text-align: center;

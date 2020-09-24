@@ -39,6 +39,8 @@ const SearchBox = () => {
 
   const router = useRouter();
 
+  //TODO: add loading state to search box
+
   function handleGoToTimeline(user: User | string) {
     if (typeof user === 'object') {
       //TODO: analytics
