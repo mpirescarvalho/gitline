@@ -24,6 +24,10 @@ export const Container = styled(motion.div)`
 
   @media (max-width: 700px) {
     width: 90%;
+
+    svg {
+      width: 80% !important;
+    }
   }
 
   /* theme toggle button */
@@ -31,6 +35,7 @@ export const Container = styled(motion.div)`
     position: absolute;
     top: 8px;
     right: 8px;
+    user-select: none;
   }
 
   img {

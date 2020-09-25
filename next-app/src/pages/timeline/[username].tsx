@@ -145,8 +145,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
-  // const { width } = useWindowDimensions();
-  // const isMobile = useMemo(() => width <= 600, [width]);
+  const { width } = useWindowDimensions();
+  const isMobile = useMemo(() => width && width <= 700, [width]);
 
   const language = useLangFilter();
 
@@ -228,14 +228,9 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
           />
 
           {filteredRepos.map((repo, index) => (
-            // <TimelineItem
-            //   key={index}
-            //   position={index % 2 === 0 || isMobile ? 'right' : 'left'}
-            //   repo={repo}
-            // />
             <TimelineItem
               key={repo.id}
-              position={index % 2 === 0 || false ? 'right' : 'left'}
+              position={index % 2 === 0 || isMobile ? 'right' : 'left'}
               repo={repo}
             />
           ))}

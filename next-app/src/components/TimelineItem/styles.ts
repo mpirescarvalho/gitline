@@ -85,6 +85,12 @@ export const Arrow = styled.div`
     box-shadow: 3px -2px 5px -1px rgba(0, 0, 0, 0.2);
     transform: rotateZ(45deg);
   }
+
+  @media (max-width: 700px) {
+    margin-right: -6px !important;
+    box-shadow: 1px -2px 3px -1px rgba(0, 0, 0, 0.2) !important;
+    transform: rotateZ(225deg) !important;
+  }
 `;
 
 export const Content = styled(motion.div)`
@@ -101,6 +107,7 @@ export const Content = styled(motion.div)`
 
   @media (max-width: 700px) {
     flex: 1;
+    flex-direction: row !important;
   }
 `;
 

@@ -15,8 +15,6 @@ interface TimelineUserProps {
 const TimelineUser: React.FC<TimelineUserProps> = ({ user }) => {
   const [theme, toggleTheme] = useTheme();
 
-  //TODO: toggle responsivity
-
   return (
     <Container
       initial={{ y: -30, opacity: 0 }}
