@@ -8,6 +8,7 @@ import Link from 'next/link';
 // import { analytics } from 'firebase/app';
 
 import useOutsideClick from '../../hooks/useOutsideClick';
+import { useRouteEffect } from '../../hooks/useRouting';
 
 import AutoCompleteItem from '../../components/AutoCompleteItem';
 
@@ -30,6 +31,7 @@ const SearchBox = () => {
   const [value, setValue] = useState<string>('');
   const [activeItem, setActiveItem] = useState(0);
   const [focused, setFocused] = useState(false);
+  const [isRoutingState, setIsRoutingState] = useState(false);
   const isRouting = useRef(false);
 
   const [loading, setLoading] = useState(false);
@@ -39,8 +41,6 @@ const SearchBox = () => {
 
   const router = useRouter();
 
-  //TODO: add loading state to search box
-
   function handleGoToTimeline(user: User | string) {
     if (typeof user === 'object') {
       //TODO: analytics
@@ -48,52 +48,57 @@ const SearchBox = () => {
       //   item_list_id: user.id.toString(),
       //   item_list_name: user.login,
       // });
-
+      setValue(user.login);
       router.push(`/timeline/${user.login}`);
     } else if (user !== '') {
       router.push(`/timeline/${user}`);
     }
   }
 
-  const handleAutoComplete = useCallback((partialUsername: string) => {
-    if (partialUsername && partialUsername.length >= 3) {
-      setLoading(true);
+  const handleAutoComplete = useCallback(
+    (partialUsername: string) => {
+      if (
+        partialUsername &&
+        partialUsername.length >= 3 &&
+        !isRouting.current
+      ) {
+        setLoading(true);
 
-      //TODO: analytics
-      // analytics().logEvent('search', {
-      //   search_term: partialUsername,
-      // });
+        //TODO: analytics
+        // analytics().logEvent('search', {
+        //   search_term: partialUsername,
+        // });
 
-      fetch(
-        `https://api.github.com/search/users?q=${partialUsername}+in:login&per_page=4&page=1`
-      )
-        .then(response => response.json())
-        .then((res: SearchResponse) => {
-          if (!isRouting.current) {
+        fetch(
+          `https://api.github.com/search/users?q=${partialUsername}+in:login&per_page=4&page=1`
+        )
+          .then(response => response.json())
+          .then((res: SearchResponse) => {
+            if (!isRouting.current) {
+              setLoading(false);
+              setAutoCompleteItems(res.items);
+            }
+
+            //TODO: analytics
+            // analytics().logEvent('view_search_results', {
+            //   search_term: partialUsername,
+            // });
+          })
+          .catch(err => {
             setLoading(false);
-            setAutoCompleteItems(res.items);
-          } else {
-            isRouting.current = false;
-          }
-
-          //TODO: analytics
-          // analytics().logEvent('view_search_results', {
-          //   search_term: partialUsername,
-          // });
-        })
-        .catch(err => {
-          setLoading(false);
-          console.error(err);
-          //TODO: analytics
-          // analytics().logEvent('exception', {
-          //   description: err,
-          //   fatal: false,
-          // });
-        });
-    } else {
-      setAutoCompleteItems([]);
-    }
-  }, []);
+            console.error(err);
+            //TODO: analytics
+            // analytics().logEvent('exception', {
+            //   description: err,
+            //   fatal: false,
+            // });
+          });
+      } else {
+        setAutoCompleteItems([]);
+      }
+    },
+    [isRouting]
+  );
 
   useEffect(() => {
     handleAutoComplete(value);
@@ -103,17 +108,21 @@ const SearchBox = () => {
     setActiveItem(0);
   }, [autoCompleteItems]);
 
-  useEffect(() => {
-    const handleRouteChange = () => {
+  useRouteEffect(
+    () => {
+      //routing start
       isRouting.current = true;
+      setIsRoutingState(true);
       setAutoCompleteItems([]);
       setLoading(false);
+    },
+    () => {
+      //routing end
+      isRouting.current = false;
+      setIsRoutingState(false);
       setValue('');
-      wrapperRef.current.focus();
-    };
-    router.events.on('routeChangeStart', handleRouteChange);
-    return () => router.events.off('routeChangeStart', handleRouteChange);
-  }, []);
+    }
+  );
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -155,6 +164,7 @@ const SearchBox = () => {
           debounceTimeout={800}
           minLength={0}
           onFocus={() => setFocused(true)}
+          disabled={isRoutingState}
         />
 
         <button type="submit">
