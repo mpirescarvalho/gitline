@@ -32,7 +32,9 @@ const SearchBox = () => {
   const [activeItem, setActiveItem] = useState(0);
   const [focused, setFocused] = useState(false);
   const [isRoutingState, setIsRoutingState] = useState(false);
+
   const isRouting = useRef(false);
+  const canDisplayItems = useRef(false);
 
   const [loading, setLoading] = useState(false);
   const [autoCompleteItems, setAutoCompleteItems] = useState<User[]>([]);
@@ -48,6 +50,8 @@ const SearchBox = () => {
       //   item_list_id: user.id.toString(),
       //   item_list_name: user.login,
       // });
+      canDisplayItems.current = false;
+      isRouting.current = true;
       setValue(user.login);
       router.push(`/timeline/${user.login}`);
     } else if (user !== '') {
@@ -62,6 +66,7 @@ const SearchBox = () => {
         partialUsername.length >= 3 &&
         !isRouting.current
       ) {
+        canDisplayItems.current = true;
         setLoading(true);
 
         //TODO: analytics
@@ -74,7 +79,8 @@ const SearchBox = () => {
         )
           .then(response => response.json())
           .then((res: SearchResponse) => {
-            if (!isRouting.current) {
+            if (!isRouting.current && canDisplayItems.current) {
+              canDisplayItems.current = false;
               setLoading(false);
               setAutoCompleteItems(res.items);
             }
@@ -85,6 +91,7 @@ const SearchBox = () => {
             // });
           })
           .catch(err => {
+            canDisplayItems.current = false;
             setLoading(false);
             console.error(err);
             //TODO: analytics
@@ -97,7 +104,7 @@ const SearchBox = () => {
         setAutoCompleteItems([]);
       }
     },
-    [isRouting]
+    [isRouting, canDisplayItems]
   );
 
   useEffect(() => {
@@ -111,6 +118,7 @@ const SearchBox = () => {
   useRouteEffect(
     () => {
       //routing start
+      canDisplayItems.current = false;
       isRouting.current = true;
       setIsRoutingState(true);
       setAutoCompleteItems([]);
