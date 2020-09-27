@@ -4,8 +4,9 @@ import { DebounceInput } from 'react-debounce-input';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import '../../firebase/initFirebase';
 
-// import { analytics } from 'firebase/app';
+import { analytics } from 'firebase/app';
 
 import useOutsideClick from '../../hooks/useOutsideClick';
 import { useRouteEffect } from '../../hooks/useRouting';
@@ -44,17 +45,22 @@ const SearchBox = () => {
   const router = useRouter();
 
   function handleGoToTimeline(user: User | string) {
+    canDisplayItems.current = false;
+    isRouting.current = true;
+
     if (typeof user === 'object') {
-      //TODO: analytics
-      // analytics().logEvent('select_item', {
-      //   item_list_id: user.id.toString(),
-      //   item_list_name: user.login,
-      // });
-      canDisplayItems.current = false;
-      isRouting.current = true;
+      analytics().logEvent('select_item', {
+        item_list_id: user.id.toString(),
+        item_list_name: user.login,
+      });
+
       setValue(user.login);
       router.push(`/timeline/${user.login}`);
     } else if (user !== '') {
+      analytics().logEvent<string>('view_item', {
+        value: user,
+      });
+
       router.push(`/timeline/${user}`);
     }
   }
@@ -69,10 +75,9 @@ const SearchBox = () => {
         canDisplayItems.current = true;
         setLoading(true);
 
-        //TODO: analytics
-        // analytics().logEvent('search', {
-        //   search_term: partialUsername,
-        // });
+        analytics().logEvent('search', {
+          search_term: partialUsername,
+        });
 
         fetch(
           `https://api.github.com/search/users?q=${partialUsername}+in:login&per_page=4&page=1`
@@ -83,22 +88,21 @@ const SearchBox = () => {
               canDisplayItems.current = false;
               setLoading(false);
               setAutoCompleteItems(res.items);
-            }
 
-            //TODO: analytics
-            // analytics().logEvent('view_search_results', {
-            //   search_term: partialUsername,
-            // });
+              analytics().logEvent('view_search_results', {
+                search_term: partialUsername,
+              });
+            }
           })
           .catch(err => {
             canDisplayItems.current = false;
             setLoading(false);
             console.error(err);
-            //TODO: analytics
-            // analytics().logEvent('exception', {
-            //   description: err,
-            //   fatal: false,
-            // });
+
+            analytics().logEvent('exception', {
+              description: err,
+              fatal: false,
+            });
           });
       } else {
         setAutoCompleteItems([]);

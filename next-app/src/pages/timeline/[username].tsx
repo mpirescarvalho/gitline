@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import MoonLoader from 'react-spinners/MoonLoader';
 import Error from 'next/error';
 import { motion } from 'framer-motion';
+import '../../firebase/initFirebase';
+import { analytics } from 'firebase/app';
 
 import useLangFilter from '../../hooks/useLangFilter';
 import { useLogPageView } from '../../hooks/analytics';
@@ -160,14 +162,18 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
     return array;
   }, [repos]);
 
-  const filteredRepos = useMemo(
-    () =>
-      repos?.filter(
-        repo =>
-          repo.language === (language === 'All' ? repo.language : language)
-      ),
-    [repos, language]
-  );
+  const filteredRepos = useMemo(() => {
+    if (language !== 'All') {
+      analytics().logEvent<string>('filter', {
+        user: user.login,
+        lang: language,
+      });
+    }
+
+    return repos?.filter(
+      repo => repo.language === (language === 'All' ? repo.language : language)
+    );
+  }, [repos, language]);
 
   const router = useRouter();
 

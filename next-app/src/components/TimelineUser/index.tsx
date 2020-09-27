@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import DarkModeToggle from 'react-dark-mode-toggle';
 import { motion } from 'framer-motion';
+import '../../firebase/initFirebase';
+import { analytics } from 'firebase/app';
 
 import { User } from '../../pages/timeline/[username]';
 
@@ -15,6 +17,15 @@ interface TimelineUserProps {
 const TimelineUser: React.FC<TimelineUserProps> = ({ user }) => {
   const [theme, toggleTheme] = useTheme();
 
+  const handleThemeChange = useCallback(() => {
+    analytics().logEvent<string>('toggle_theme', {
+      from_theme: theme,
+      to_theme: theme === 'dark' ? 'light' : 'dark',
+    });
+
+    toggleTheme();
+  }, [theme]);
+
   return (
     <Container
       initial={{ y: -30, opacity: 0 }}
@@ -28,7 +39,7 @@ const TimelineUser: React.FC<TimelineUserProps> = ({ user }) => {
         {theme && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <DarkModeToggle
-              onChange={toggleTheme}
+              onChange={handleThemeChange}
               checked={theme === 'dark'}
               size={65}
             />
