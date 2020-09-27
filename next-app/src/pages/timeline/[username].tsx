@@ -171,8 +171,8 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
 
   const router = useRouter();
 
-  //TODO: analytics
-  // useLogPageView('home_page');
+  useLogPageView('rate_limit', () => rateExceeded);
+  useLogPageView('timeline', () => !!user);
 
   if (rateExceeded) {
     return (

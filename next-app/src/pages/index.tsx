@@ -1,14 +1,13 @@
 import React from 'react';
 
-// import { useLogPageView } from '../../hooks/analytics';
+import { useLogPageView } from '../hooks/analytics';
 import SearchBox from '../components/SearchBox';
 import Footer from '../components/Footer';
 
 import { Container } from '../styles/pages/home';
 
 const SearchPage: React.FC = () => {
-  // useLogPageView('home_page');
-  //TODO: analytics
+  useLogPageView('home_page');
 
   return (
     <Container>

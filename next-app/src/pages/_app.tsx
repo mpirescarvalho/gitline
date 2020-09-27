@@ -3,6 +3,8 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
+import '../firebase/initFirebase';
+
 import GlobalStyles from '../styles/global';
 
 import { ThemeProvider } from '../hooks/useTheme';
@@ -12,9 +14,9 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-const MyApp = ({ Component, pageProps }: AppProps) => (
-  //TODO: start analytics
+//TODO: SEO issues
 
+const MyApp = ({ Component, pageProps }: AppProps) => (
   <ThemeProvider>
     <Component {...pageProps} />
     <GlobalStyles />

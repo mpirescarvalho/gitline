@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 
-// import { useLogPageView } from '../../hooks/analytics';
+import { useLogPageView } from '../hooks/analytics';
 
 import SearchBox from '../components/SearchBox';
 
@@ -12,8 +12,7 @@ interface NotFoundProps {
 }
 
 const NotFound: React.FC<NotFoundProps> = ({ user }) => {
-  // useLogPageView('not_found');
-  //TODO: analytics
+  useLogPageView('not_found');
 
   return (
     <Container>
