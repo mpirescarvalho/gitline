@@ -177,9 +177,10 @@ const SearchBox = () => {
           minLength={0}
           onFocus={() => setFocused(true)}
           disabled={isRoutingState}
+          aria-label="Username"
         />
 
-        <button type="submit">
+        <button aria-label="Search" type="submit">
           <MdSearch size={24} color="#fff" />
         </button>
       </ContainerInput>
@@ -191,7 +192,7 @@ const SearchBox = () => {
       ) : (
         autoCompleteItems &&
         focused && (
-          <div>
+          <ul>
             {autoCompleteItems.map((item, index) => (
               <ItemContainer
                 key={index}
@@ -209,7 +210,7 @@ const SearchBox = () => {
                 </Link>
               </ItemContainer>
             ))}
-          </div>
+          </ul>
         )
       )}
     </Wrapper>

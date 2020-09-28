@@ -21,7 +21,7 @@ export const Container = styled.div`
     color: #fff;
   }
 
-  > div {
+  > main {
     width: 100%;
     height: 100%;
     display: flex;

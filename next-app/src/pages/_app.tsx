@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import Head from 'next/head';
 
 import '../firebase/initFirebase';
 
@@ -18,6 +19,11 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <ThemeProvider>
+    <Head>
+      <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </Head>
+
     <Component {...pageProps} />
     <GlobalStyles />
   </ThemeProvider>

@@ -68,7 +68,7 @@ export const LoadingContainer = styled.div`
   padding-top: 6px;
 `;
 
-export const ItemContainer = styled.div`
+export const ItemContainer = styled.li`
   cursor: pointer;
   a {
     text-decoration: none;
