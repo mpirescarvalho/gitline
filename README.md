@@ -35,7 +35,7 @@ You'll need [Node.js](https://nodejs.org) installed on your computer in order to
 $ git clone https://github.com/mpirescarvalho/gitline.git
 $ cd gitline
 $ npm install
-$ npm run start
+$ npm run dev
 ```
 
 Runs the app in the development mode.<br/>
