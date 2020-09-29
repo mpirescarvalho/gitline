@@ -14,5 +14,7 @@ const clientCredentials = {
 
 if (typeof window !== 'undefined' && !firebase.apps.length) {
   firebase.initializeApp(clientCredentials);
-  firebase.analytics();
+  if (process.env.NODE_ENV === 'production') {
+    firebase.analytics();
+  }
 }

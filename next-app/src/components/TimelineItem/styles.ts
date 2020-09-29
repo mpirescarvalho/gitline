@@ -6,7 +6,7 @@ interface ColorProp {
   colorType?: 'light' | 'dark';
 }
 
-export const Container = styled.div`
+export const Container = styled.li`
   width: 940px;
   margin-top: 13px;
   display: flex;

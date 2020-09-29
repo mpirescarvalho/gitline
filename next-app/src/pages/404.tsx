@@ -18,6 +18,7 @@ const NotFound: React.FC<NotFoundProps> = ({ user }) => {
     <Container>
       <Head>
         <meta name="robots" content="noindex" />
+        <title>{user ? 'User not found' : 'Page not found'} · Gitline</title>
       </Head>
       <header>
         <SearchBox />

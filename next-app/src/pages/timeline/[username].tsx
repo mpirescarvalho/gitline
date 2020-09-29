@@ -6,6 +6,7 @@ import Error from 'next/error';
 import { motion } from 'framer-motion';
 import '../../firebase/initFirebase';
 import { analytics } from 'firebase/app';
+import Head from 'next/head';
 
 import useLangFilter from '../../hooks/useLangFilter';
 import { useLogPageView } from '../../hooks/analytics';
@@ -189,6 +190,16 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
   if (router.isFallback) {
     return (
       <Center>
+        <Head>
+          <title>
+            Gitline · Your github repositories history beatifuly structured
+          </title>
+          <meta
+            name="description"
+            content="Gitline is the right place to view your github repositories timeline beatifuly organized and sorted by creation date. Filter them by the main language and share with anyone you want."
+          />
+        </Head>
+
         <MoonLoader color="#9B1768" />
       </Center>
     );
@@ -200,6 +211,16 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
 
   return (
     <Container>
+      <Head>
+        <title>
+          {user.login} {user.name && `(${user.name})`} · Gitline
+        </title>
+        <meta
+          name="description"
+          content="Gitline is the right place to view your github repositories timeline beatifuly organized and sorted by creation date. Filter them by the main language and share with anyone you want."
+        />
+      </Head>
+
       <header>
         <motion.div
           initial={{ x: 20, opacity: 0 }}
@@ -223,36 +244,37 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
         </motion.div>
       </header>
 
-      <TimelineUser user={user} />
+      <main>
+        <TimelineUser user={user} />
 
-      {filteredRepos && filteredRepos.length > 0 ? (
-        <ContainerRepos>
-          <Line
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ ease: [0.24, 1.02, 0.66, 0.99], duration: 1 }}
-          />
-
-          {filteredRepos.map((repo, index) => (
-            <TimelineItem
-              key={repo.id}
-              position={index % 2 === 0 || isMobile ? 'right' : 'left'}
-              repo={repo}
+        {filteredRepos && filteredRepos.length > 0 ? (
+          <ContainerRepos>
+            <Line
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ease: [0.24, 1.02, 0.66, 0.99], duration: 1 }}
             />
-          ))}
 
-          <Footer />
-        </ContainerRepos>
-      ) : (
-        <ContainerNoRepo>
-          <p>
-            {repos && repos.length > 0
-              ? 'No matches found for this filter'
-              : `${user.login} doesn’t have any public repositories yet.`}
-          </p>
-          <Footer />
-        </ContainerNoRepo>
-      )}
+            {filteredRepos.map((repo, index) => (
+              <TimelineItem
+                key={repo.id}
+                position={index % 2 === 0 || isMobile ? 'right' : 'left'}
+                repo={repo}
+              />
+            ))}
+          </ContainerRepos>
+        ) : (
+          <ContainerNoRepo>
+            <p>
+              {repos && repos.length > 0
+                ? 'No matches found for this filter'
+                : `${user.login} doesn’t have any public repositories yet.`}
+            </p>
+          </ContainerNoRepo>
+        )}
+      </main>
+
+      <Footer />
     </Container>
   );
 };

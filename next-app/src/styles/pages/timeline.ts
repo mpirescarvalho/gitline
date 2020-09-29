@@ -59,9 +59,24 @@ export const Container = styled.div`
       height: 160px;
     }
   }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+  }
+
+  footer {
+    margin: 40px 0 20px 0;
+    padding: 0 20px;
+    text-align: center;
+  }
 `;
 
-export const ContainerRepos = styled.div`
+export const ContainerRepos = styled.ul`
   width: 100%;
   flex: 1;
   display: flex;
@@ -72,13 +87,6 @@ export const ContainerRepos = styled.div`
   position: relative;
 
   padding: 40px 0;
-
-  footer {
-    width: 100%;
-    margin: 60px 0 -10px 0;
-    display: flex;
-    justify-content: center;
-  }
 `;
 
 export const Line = styled(motion.div)`
@@ -87,14 +95,14 @@ export const Line = styled(motion.div)`
   top: -140px;
   display: block;
   width: 8px;
-  height: 100%;
+  height: calc(100% + 150px);
   margin-left: -3px;
 
   background: var(--background);
   background: linear-gradient(
     180deg,
     var(--boxSecondary) 0,
-    var(--boxSecondary) calc(100% - 120px),
+    var(--boxSecondary) calc(100% - 150px),
     var(--background) calc(100% - 10px)
   );
 
@@ -115,6 +123,8 @@ export const ContainerNoRepo = styled.div`
   align-items: center;
   justify-content: center;
 
+  margin-top: 40px;
+
   > p {
     flex: 1;
     display: flex;
@@ -128,13 +138,9 @@ export const ContainerNoRepo = styled.div`
 
     text-align: center;
   }
-
-  footer {
-    margin-bottom: 20px;
-  }
 `;
 
-export const Center = styled.div`
+export const Center = styled.main`
   width: 100vw;
   height: 100vh;
   display: flex;

@@ -13,10 +13,12 @@ const SearchPage: React.FC = () => {
   return (
     <Container>
       <Head>
-        <title>Gitline</title>
+        <title>
+          Gitline · Your github repositories history beatifuly structured
+        </title>
         <meta
           name="description"
-          content="Your github repositories history beatifuly structured, organized and sorted by creation date. Filter them by the main language and share with anyone you want."
+          content="Gitline is the right place to view your github repositories timeline beatifuly organized and sorted by creation date. Filter them by the main language and share with anyone you want."
         />
       </Head>
 

@@ -32,21 +32,23 @@ const Dropdown: React.FC<DropdownProps> = ({ items, selected, prefix }) => {
         </div>
         <FaCaretDown />
       </div>
-      <div className="dropdown">
+      <ul className="dropdown">
         {open &&
           items.map((item, index) => (
-            <Link
-              key={index}
-              href={`/timeline/${router.query.username}?lang=${item}`}
-              prefetch={false}
-              shallow
-            >
-              <a>
-                <div className="item">{item}</div>
-              </a>
-            </Link>
+            <li>
+              <Link
+                key={index}
+                href={`/timeline/${router.query.username}?lang=${item}`}
+                prefetch={false}
+                shallow
+              >
+                <a>
+                  <div className="item">{item}</div>
+                </a>
+              </Link>
+            </li>
           ))}
-      </div>
+      </ul>
     </Container>
   );
 };

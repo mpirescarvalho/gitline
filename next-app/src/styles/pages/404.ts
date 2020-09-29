@@ -35,6 +35,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     font-family: 'Russo One', sans-serif;
+    padding: 0 20px;
 
     h1 {
       color: var(--textPrimary);
@@ -44,7 +45,8 @@ export const Container = styled.div`
     }
 
     h2 {
-      color: var(--textSecondary);
+      color: var(--textPrimary);
+      font-weight: 300;
       transition: color 0.2s;
       font-size: 46px;
       text-align: center;
