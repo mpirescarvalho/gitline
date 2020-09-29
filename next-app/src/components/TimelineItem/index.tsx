@@ -36,7 +36,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   position = 'left',
   repo,
 }) => {
-  const [isVisible, ref] = useVisibility<HTMLDivElement>(-30);
+  const [isVisible, ref] = useVisibility<HTMLLIElement>(-30);
   const showed = useRef(false);
   const [delay, setDelay] = useState(0.7);
 

@@ -33,10 +33,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         property="og:description"
         content="Gitline is the right place to view your github repositories timeline beatifuly organized and sorted by creation date. Filter them by the main language and share with anyone you want."
       />
-      <meta
-        property="og:image"
-        content="https://gitline.web.app/social-img.jpg"
-      />
+      <meta property="og:image" content="/social-img.jpg" />
 
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content="https://gitline.web.app/" />
@@ -48,10 +45,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         property="twitter:description"
         content="Gitline is the right place to view your github repositories timeline beatifuly organized and sorted by creation date. Filter them by the main language and share with anyone you want."
       />
-      <meta
-        property="twitter:image"
-        content="https://gitline.web.app/social-img.jpg"
-      />
+      <meta property="twitter:image" content="/social-img.jpg" />
 
       <link
         rel="apple-touch-icon"

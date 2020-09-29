@@ -82,7 +82,7 @@ export const ContainerRepos = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
+  overflow: hidden;
 
   position: relative;
 
