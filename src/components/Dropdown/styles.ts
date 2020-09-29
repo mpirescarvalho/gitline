@@ -13,35 +13,41 @@ export const Container = styled.div`
 
   overflow: hidden;
 
+  a {
+    text-decoration: none;
+  }
+
   /* item */
-  > div {
+  .item {
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background: ${props => props.theme.colors.box};
+    background: var(--box);
     transition: all 0.3s;
 
-    color: ${props => props.theme.colors.textSecondary};
-
-    + div {
-      border-top: 1px solid ${props => props.theme.colors.border};
-
-      &:hover {
-        background: ${props => props.theme.colors.boxSecondary};
-      }
-    }
+    color: var(--textSecondary);
 
     /* select item text */
     > div > span {
       margin-left: 5px;
-      color: ${props => props.theme.colors.textPrimary};
+      color: var(--textPrimary);
     }
 
     /* dropdown icon */
     svg {
       margin-left: 15px;
+    }
+  }
+
+  .dropdown {
+    .item {
+      border-top: 1px solid var(--border);
+
+      &:hover {
+        background: var(--boxSecondary);
+      }
     }
   }
 `;

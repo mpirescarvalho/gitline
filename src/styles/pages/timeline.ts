@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export const Container = styled.div`
   width: 100vw;
@@ -6,7 +7,7 @@ export const Container = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
 
-  background: ${props => props.theme.colors.background};
+  background: var(--background);
   transition: background-color 0.4s;
 
   display: flex;
@@ -58,43 +59,51 @@ export const Container = styled.div`
       height: 160px;
     }
   }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+  }
+
+  footer {
+    margin: 40px 0 20px 0;
+    padding: 0 20px;
+    text-align: center;
+  }
 `;
 
-export const ContainerRepos = styled.div`
+export const ContainerRepos = styled.ul`
   width: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
+  overflow: hidden;
 
   position: relative;
 
   padding: 40px 0;
-
-  footer {
-    width: 100%;
-    margin: 60px 0 -10px 0;
-    display: flex;
-    justify-content: center;
-  }
 `;
 
-export const Line = styled.div`
+export const Line = styled(motion.div)`
   position: absolute;
   left: 50%;
   top: -140px;
   display: block;
   width: 8px;
-  height: 100%;
+  height: calc(100% + 150px);
   margin-left: -3px;
 
-  background: ${props => props.theme.colors.background};
+  background: var(--background);
   background: linear-gradient(
     180deg,
-    ${props => props.theme.colors.boxSecondary} 0,
-    ${props => props.theme.colors.boxSecondary} calc(100% - 120px),
-    ${props => props.theme.colors.background} calc(100% - 10px)
+    var(--boxSecondary) 0,
+    var(--boxSecondary) calc(100% - 150px),
+    var(--background) calc(100% - 10px)
   );
 
   transition: background 0.2s;
@@ -114,21 +123,27 @@ export const ContainerNoRepo = styled.div`
   align-items: center;
   justify-content: center;
 
+  margin-top: 40px;
+
   > p {
     flex: 1;
     display: flex;
     align-items: center;
 
     font-size: 18px;
-    color: ${props => props.theme.colors.textPrimaryInBackground};
+    color: var(--textPrimary);
     font-weight: bold;
 
     transition: color 0.2s;
 
     text-align: center;
   }
+`;
 
-  footer {
-    margin-bottom: 20px;
-  }
+export const Center = styled.main`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

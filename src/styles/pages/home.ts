@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
-import background from '../../assets/images/background.png';
-
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
 
-  background: url(${background});
+  background: url('/images/background.jpg');
   background-size: cover;
 
   display: flex;
@@ -23,7 +21,7 @@ export const Container = styled.div`
     color: #fff;
   }
 
-  > div {
+  > main {
     width: 100%;
     height: 100%;
     display: flex;
@@ -34,5 +32,9 @@ export const Container = styled.div`
 
   footer {
     margin-bottom: 20px;
+
+    span {
+      color: #fff;
+    }
   }
 `;

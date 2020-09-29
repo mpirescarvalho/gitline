@@ -1,12 +1,10 @@
-import { useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
+import { useRouter } from 'next/router';
 
 export default function useLangFilter() {
-  const location = useLocation();
+  const router = useRouter();
 
-  const filter = useMemo(() => new URLSearchParams(location.search), [
-    location,
-  ]);
+  const filter = useMemo(() => router.query.lang as string, [router]);
 
-  return filter.get('lang') || 'All';
+  return filter || 'All';
 }

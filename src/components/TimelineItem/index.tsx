@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiGitRepoForked } from 'react-icons/bi';
 
 import useVisibility from '../../hooks/useVisibility';
 
-import { Repo } from '../../pages/Timeline';
+import { Repo } from '../../pages/timeline/[username]';
 import {
   formatRepoDate,
   formatLastUpdateDate,
@@ -36,8 +36,9 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   position = 'left',
   repo,
 }) => {
-  const [isVisible, ref] = useVisibility<HTMLDivElement>(-30);
+  const [isVisible, ref] = useVisibility<HTMLLIElement>(-30);
   const showed = useRef(false);
+  const [delay, setDelay] = useState(0.7);
 
   const langColor = useMemo(() => getLanguageColor(repo.language), [repo]);
 
@@ -56,18 +57,27 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
     if (isVisible) showed.current = true;
   }, [isVisible]);
 
+  useEffect(() => {
+    const id = setTimeout(() => {
+      setDelay(0);
+    }, 700);
+    return () => clearTimeout(id);
+  }, []);
+
   return (
     <Container className={position} ref={ref}>
       <TimelinePoint
-        initial={isVisible ? 'initial' : 'final'}
+        initial={'initial'}
         animate={isVisible || showed.current ? 'final' : 'initial'}
         variants={variantsScale}
+        transition={{ delay }}
         color={langColor}
       />
       <Content
         initial={isVisible ? 'final' : position}
         animate={isVisible || showed.current ? 'final' : position}
         variants={variants}
+        transition={{ delay }}
         className={position}
       >
         <Arrow className={position} />

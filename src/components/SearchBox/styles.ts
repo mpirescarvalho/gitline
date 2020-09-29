@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   max-width: 550px;
 
   transition: background-color 0.4s;
-  background: ${props => props.theme.colors.box};
+  background: var(--box);
 
   border-radius: 4px;
 
@@ -35,8 +35,8 @@ export const ContainerInput = styled.form`
     border: 0;
 
     padding: 0 16px;
-    color: ${props => props.theme.colors.textPrimary};
-    background: ${props => props.theme.colors.box};
+    color: var(--textPrimary);
+    background: var(--box);
 
     transition: all 0.4s;
   }
@@ -44,7 +44,7 @@ export const ContainerInput = styled.form`
   button {
     width: 42px;
     height: 42px;
-    background: ${props => props.theme.colors.primary};
+    background: var(--primary);
     border: 0;
     border-radius: 4px;
     margin-right: 4px;
@@ -54,7 +54,7 @@ export const ContainerInput = styled.form`
     transition: all 0.2s;
 
     &:hover {
-      background: ${props => props.theme.colors.primaryDark};
+      background: var(--primaryDark);
     }
   }
 `;
@@ -64,10 +64,13 @@ export const LoadingContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 50px;
-  border-top: 1px solid ${props => props.theme.colors.border};
+  border-top: 1px solid var(--border);
   padding-top: 6px;
 `;
 
-export const ItemContainer = styled.div`
+export const ItemContainer = styled.li`
   cursor: pointer;
+  a {
+    text-decoration: none;
+  }
 `;

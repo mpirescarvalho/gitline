@@ -25,10 +25,15 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
 
     transition: background-color 0.4s;
-    background: ${props => props.theme.colors.background};
+    background: var(--background);
     min-width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;
+  }
+
+  #nprogress .bar {
+    background: var(--primary) !important;
+    height: 3px !important;
   }
 
 `;
