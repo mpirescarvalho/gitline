@@ -30,17 +30,23 @@ import {
 interface TimelineItemProps {
   position?: 'left' | 'right';
   repo: Repo;
+  alwaysVisible?: boolean;
 }
 
 const TimelineItem: React.FC<TimelineItemProps> = ({
   position = 'left',
   repo,
+  alwaysVisible,
 }) => {
-  const [isVisible, ref] = useVisibility<HTMLLIElement>(-30);
+  const [isVisibleRaw, ref] = useVisibility<HTMLLIElement>(-30);
   const showed = useRef(false);
   const [delay, setDelay] = useState(0.7);
 
   const langColor = useMemo(() => getLanguageColor(repo.language), [repo]);
+  const isVisible = useMemo(() => isVisibleRaw || alwaysVisible, [
+    isVisibleRaw,
+    alwaysVisible,
+  ]);
 
   const variants = {
     final: { opacity: 1, x: 0 },
@@ -74,7 +80,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         color={langColor}
       />
       <Content
-        initial={isVisible ? 'final' : position}
+        initial={position}
         animate={isVisible || showed.current ? 'final' : position}
         variants={variants}
         transition={{ delay }}

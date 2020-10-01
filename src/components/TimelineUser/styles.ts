@@ -16,8 +16,7 @@ export const Container = styled(motion.div)`
   align-items: center;
   justify-content: center;
 
-  padding-top: 62px;
-  padding-bottom: 18px;
+  padding: 62px 18px 18px 18px;
   position: relative;
 
   box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
@@ -59,6 +58,7 @@ export const Container = styled(motion.div)`
     line-height: 20px;
     color: var(--textPrimary);
     transition: color 0.3s;
+    text-align: center;
 
     &:hover {
       color: var(--secondary);

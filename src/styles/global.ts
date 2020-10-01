@@ -26,9 +26,11 @@ export default createGlobalStyle`
 
     transition: background-color 0.4s;
     background: var(--background);
-    min-width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;
+
+    left: 0;
+    right: 0;
   }
 
   #nprogress .bar {

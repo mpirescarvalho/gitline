@@ -2,10 +2,9 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden;
 
   background: var(--background);
   transition: background-color 0.4s;

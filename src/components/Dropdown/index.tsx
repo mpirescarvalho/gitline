@@ -35,9 +35,8 @@ const Dropdown: React.FC<DropdownProps> = ({ items, selected, prefix }) => {
       <ul className="dropdown">
         {open &&
           items.map((item, index) => (
-            <li>
+            <li key={index}>
               <Link
-                key={index}
                 href={`/timeline/${router.query.username}?lang=${item}`}
                 prefetch={false}
                 shallow

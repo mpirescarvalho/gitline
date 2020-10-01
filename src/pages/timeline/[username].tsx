@@ -143,7 +143,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       ...props,
       rateExceeded,
     },
-    revalidate: 1,
+    revalidate: 10,
   };
 };
 
@@ -260,6 +260,7 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
                 key={repo.id}
                 position={index % 2 === 0 || isMobile ? 'right' : 'left'}
                 repo={repo}
+                alwaysVisible={index === 0}
               />
             ))}
           </ContainerRepos>
