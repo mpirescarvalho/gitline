@@ -22,7 +22,7 @@ export const THEME = Object.keys(COLORS).reduce((prev, curr) => {
   prev[curr] = `var(--${curr})`
   return prev
 }, {}) as {
-  [key in keyof typeof COLORS]: `var(--${key})`
+  [key in keyof typeof COLORS]: string
 }
 
 export const COLOR_MODE_KEY = 'color-mode';
