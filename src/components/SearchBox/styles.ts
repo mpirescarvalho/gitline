@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { THEME } from '../../styles/theme/colors'
 
 export const Wrapper = styled.div`
   width: 90%;
   max-width: 550px;
 
   transition: background-color 0.4s;
-  background: var(--box);
+  background: ${THEME.box};
 
   border-radius: 4px;
 
@@ -35,8 +36,8 @@ export const ContainerInput = styled.form`
     border: 0;
 
     padding: 0 16px;
-    color: var(--textPrimary);
-    background: var(--box);
+    color: ${THEME.textPrimary};
+    background: ${THEME.box};
 
     transition: all 0.4s;
   }
@@ -44,7 +45,7 @@ export const ContainerInput = styled.form`
   button {
     width: 42px;
     height: 42px;
-    background: var(--primary);
+    background: ${THEME.primary};
     border: 0;
     border-radius: 4px;
     margin-right: 4px;
@@ -54,7 +55,7 @@ export const ContainerInput = styled.form`
     transition: all 0.2s;
 
     &:hover {
-      background: var(--primaryDark);
+      background: ${THEME.primaryDark};
     }
   }
 `;
@@ -64,7 +65,7 @@ export const LoadingContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 50px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid ${THEME.border};
   padding-top: 6px;
 `;
 

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { THEME } from '../theme/colors'
 
 export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
 
-  background: var(--background);
+  background: ${THEME.background};
   transition: background-color 0.4s;
 
   display: flex;
@@ -97,12 +98,12 @@ export const Line = styled(motion.div)`
   height: calc(100% + 150px);
   margin-left: -3px;
 
-  background: var(--background);
+  background: ${THEME.background};
   background: linear-gradient(
     180deg,
-    var(--boxSecondary) 0,
-    var(--boxSecondary) calc(100% - 150px),
-    var(--background) calc(100% - 10px)
+    ${THEME.boxSecondary} 0,
+    ${THEME.boxSecondary} calc(100% - 150px),
+    ${THEME.background} calc(100% - 10px)
   );
 
   transition: background 0.2s;
@@ -130,7 +131,7 @@ export const ContainerNoRepo = styled.div`
     align-items: center;
 
     font-size: 18px;
-    color: var(--textPrimary);
+    color: ${THEME.textPrimary};
     font-weight: bold;
 
     transition: color 0.2s;

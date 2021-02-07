@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { THEME } from '../../styles/theme/colors'
 
 export const Container = styled(motion.div)`
   width: 525px;
@@ -8,7 +9,7 @@ export const Container = styled(motion.div)`
   z-index: 15;
 
   transition: background-color 0.4s;
-  background: var(--box);
+  background: ${THEME.box};
   border-radius: 4px;
 
   display: flex;
@@ -41,8 +42,8 @@ export const Container = styled(motion.div)`
     width: 100px;
     height: 100px;
     transition: border-color 0.4s;
-    border: 4px solid var(--box);
-    background: var(--box);
+    border: 4px solid ${THEME.box};
+    background: ${THEME.box};
     box-shadow: 0px -4px 3px -3px rgba(0, 0, 0, 0.2);
     border-radius: 50px;
     margin-top: -50px;
@@ -56,19 +57,19 @@ export const Container = styled(motion.div)`
     font-weight: bold;
     font-size: 20px;
     line-height: 20px;
-    color: var(--textPrimary);
+    color: ${THEME.textPrimary};
     transition: color 0.3s;
     text-align: center;
 
     &:hover {
-      color: var(--secondary);
+      color: ${THEME.secondary};
     }
   }
 
   h2 {
     font-weight: 500;
     font-size: 16px;
-    color: var(--textSecondary);
+    color: ${THEME.textSecondary};
     transition: color 0.3s;
   }
 
@@ -79,7 +80,7 @@ export const Container = styled(motion.div)`
     line-height: 20px;
     text-align: center;
     transition: color 0.3s;
-    color: var(--textPrimary);
+    color: ${THEME.textPrimary};
     margin-top: 8px;
 
     @media (max-width: 700px) {

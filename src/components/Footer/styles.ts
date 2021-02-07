@@ -1,16 +1,17 @@
 import styled from 'styled-components';
+import { THEME } from '../../styles/theme/colors'
 
 export const Container = styled.footer`
   > span {
-    color: var(--textPrimary);
+    color: ${THEME.textPrimary};
 
     a {
       text-decoration: none;
-      color: var(--secondary);
+      color: ${THEME.secondary};
       transition: color 0.2s;
 
       &:hover {
-        color: var(--secondaryDark);
+        color: ${THEME.secondaryDark};
       }
     }
   }

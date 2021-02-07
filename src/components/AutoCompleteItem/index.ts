@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { THEME } from '../../styles/theme/colors'
 
 const AutoCompleteItem = styled.div`
   height: 50px;
@@ -7,22 +8,22 @@ const AutoCompleteItem = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--border);
-  color: var(--textSecondary);
+  border-top: 1px solid ${THEME.border};
+  color: ${THEME.textSecondary};
 
   @media (min-width: 601px) {
     &.active {
-      background: var(--secondary);
-      color: var(--textPrimaryInSecondary);
+      background: ${THEME.secondary};
+      color: ${THEME.textPrimaryInSecondary};
 
       &::after {
         content: 'Enter';
         width: 43px;
         height: 22px;
-        color: var(--textSecondary);
+        color: ${THEME.textSecondary};
         font-family: 'Russo One', sans-serif;
         font-size: 10px;
-        background: var(--boxInSecondary);
+        background: ${THEME.boxInSecondary};
         line-height: 22px;
         text-align: center;
         border-radius: 8px;

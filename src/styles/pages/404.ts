@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { THEME } from '../theme/colors'
 
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: var(--background);
+  background: ${THEME.background};
   transition: background-color 0.4s;
 
   display: flex;
@@ -38,14 +39,14 @@ export const Container = styled.div`
     padding: 0 20px;
 
     h1 {
-      color: var(--textPrimary);
+      color: ${THEME.textPrimary};
       transition: color 0.2s;
       font-size: 90px;
       text-align: center;
     }
 
     h2 {
-      color: var(--textPrimary);
+      color: ${THEME.textPrimary};
       font-weight: 300;
       transition: color 0.2s;
       font-size: 46px;

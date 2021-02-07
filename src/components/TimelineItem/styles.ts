@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { THEME } from '../../styles/theme/colors'
 
 interface ColorProp {
   color: string;
@@ -49,7 +50,7 @@ export const TimelinePoint = styled(motion.div)<ColorProp>`
   margin-left: -23px;
   border-radius: 50%;
   transition: background-color 0.4s;
-  background: var(--box);
+  background: ${THEME.box};
   border: 4px solid ${props => props.color};
 
   box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
@@ -70,7 +71,7 @@ export const Arrow = styled.div`
   box-sizing: content-box;
   width: 11px;
   height: 11px;
-  background: var(--box);
+  background: ${THEME.box};
   margin-top: 28px;
   transition: background-color 0.4s;
 
@@ -114,7 +115,7 @@ export const Content = styled(motion.div)`
 export const Item = styled.div`
   width: 100%;
   padding: 20px 20px 15px 20px;
-  background: var(--box);
+  background: ${THEME.box};
   transition: background-color 0.4s;
 
   display: flex;
@@ -153,12 +154,12 @@ export const Name = styled.a`
   font-weight: bold;
   font-size: 18px;
   line-height: 20px;
-  color: var(--textPrimary);
+  color: ${THEME.textPrimary};
   word-wrap: break-word;
   text-decoration: none;
   transition: color 0.2s;
   &:hover {
-    color: var(--secondary);
+    color: ${THEME.secondary};
   }
 `;
 
@@ -167,13 +168,13 @@ export const Description = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 18px;
-  color: var(--textSecondary);
+  color: ${THEME.textSecondary};
   transition: color 0.2s;
 `;
 
 export const Footer = styled.div`
   align-self: stretch;
-  color: var(--textPrimary);
+  color: ${THEME.textPrimary};
   transition: color 0.2s;
   font-size: 12px;
 

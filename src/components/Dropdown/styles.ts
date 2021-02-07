@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { THEME } from '../../styles/theme/colors'
 
 export const Container = styled.div`
   border-radius: 4px;
@@ -24,15 +25,15 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background: var(--box);
+    background: ${THEME.box};
     transition: all 0.3s;
 
-    color: var(--textSecondary);
+    color: ${THEME.textSecondary};
 
     /* select item text */
     > div > span {
       margin-left: 5px;
-      color: var(--textPrimary);
+      color: ${THEME.textPrimary};
     }
 
     /* dropdown icon */
@@ -43,10 +44,10 @@ export const Container = styled.div`
 
   .dropdown {
     .item {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid ${THEME.border};
 
       &:hover {
-        background: var(--boxSecondary);
+        background: ${THEME.boxSecondary};
       }
     }
   }

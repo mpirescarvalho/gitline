@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { THEME } from './theme/colors'
 
 export default createGlobalStyle`
 
@@ -25,7 +26,7 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
 
     transition: background-color 0.4s;
-    background: var(--background);
+    background: ${THEME.background};
     min-height: 100vh;
     overflow-x: hidden;
 
@@ -34,7 +35,7 @@ export default createGlobalStyle`
   }
 
   #nprogress .bar {
-    background: var(--primary) !important;
+    background: ${THEME.primary} !important;
     height: 3px !important;
   }
 

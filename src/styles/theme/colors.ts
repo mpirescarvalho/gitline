@@ -1,4 +1,4 @@
-export default {
+export const COLORS = {
   primary: '#9B1768',
   primaryDark: '#931562',
 
@@ -16,7 +16,14 @@ export default {
   textSecondary: { dark: '#DADADA', light: '#8E8E8E' },
 
   textPrimaryInSecondary: '#CBCBCB',
-};
+} as const;
+
+export const THEME = Object.keys(COLORS).reduce((prev, curr) => {
+  prev[curr] = `var(--${curr})`
+  return prev
+}, {}) as {
+  [key in keyof typeof COLORS]: `var(--${key})`
+}
 
 export const COLOR_MODE_KEY = 'color-mode';
 export const INITIAL_COLOR_MODE_CSS_PROP = '--initial-color-mode';
