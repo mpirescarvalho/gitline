@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (!rateExceeded) {
     const response = await authFetch(
-      `https://api.github.com/users/${username}/repos?sort=created`
+      `https://api.github.com/users/${username}/repos?sort=created&per_page=100`
     );
 
     rateExceeded = response.status === 403;
@@ -281,3 +281,4 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
 };
 
 export default Timeline;
+
