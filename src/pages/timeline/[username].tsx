@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import MoonLoader from 'react-spinners/MoonLoader';
@@ -11,6 +11,7 @@ import Head from 'next/head';
 import useLangFilter from '../../hooks/useLangFilter';
 import { useLogPageView } from '../../hooks/analytics';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import useVisibility from '../../hooks/useVisibility';
 import { authFetch } from '../../utils';
 
 import NotFound from '../404';
@@ -49,7 +50,7 @@ export interface User {
 }
 
 interface TimelineProps {
-  repos?: Repo[];
+  initialRepos?: Repo[];
   user?: User;
   rateExceeded: boolean;
 }
@@ -97,7 +98,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (!rateExceeded) {
     const response = await authFetch(
-      `https://api.github.com/users/${username}/repos?sort=created&per_page=100`
+      `https://api.github.com/users/${username}/repos?sort=created&page=1`
     );
 
     rateExceeded = response.status === 403;
@@ -134,7 +135,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (user && repos) {
     props = {
       user,
-      repos,
+      initialRepos: repos,
     };
   }
 
@@ -147,9 +148,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
-  const { width } = useWindowDimensions();
-  const isMobile = useMemo(() => width && width <= 700, [width]);
+const Timeline = ({ user, initialRepos, rateExceeded }: TimelineProps) => {
+  const [loadedRepos, setLoadedRepos] = useState([]);
+
+  const repos = useMemo(
+    () => [...(initialRepos || []), ...loadedRepos],
+    [initialRepos, loadedRepos]
+  );
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pagesEnded, setPagesEnded] = useState(false);
+
+  const [isEndOfListReached, endOfListRef] =
+    useVisibility<HTMLDivElement>(1000);
 
   const language = useLangFilter();
 
@@ -176,7 +187,41 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
     );
   }, [repos, language]);
 
+  const fetchMoreRepos = useCallback(async () => {
+    if (pagesEnded || !user) {
+      return;
+    }
+
+    const nextPage = currentPage + 1;
+
+    const response = await fetch(
+      `https://api.github.com/users/${user.login}/repos?sort=created&page=${nextPage}`
+    );
+
+    if (response.status !== 200) {
+      setPagesEnded(true);
+      return;
+    }
+
+    const newRepos = (await response.json()) as Repo[];
+    if (newRepos.length === 0) {
+      setPagesEnded(true);
+      return;
+    }
+
+    setLoadedRepos(loadedRepos => [...loadedRepos, ...newRepos]);
+    setCurrentPage(nextPage);
+  }, [user, currentPage, pagesEnded]);
+
+  useEffect(() => {
+    if (isEndOfListReached) {
+      fetchMoreRepos();
+    }
+  }, [isEndOfListReached, fetchMoreRepos]);
+
   const router = useRouter();
+  const { width } = useWindowDimensions();
+  const isMobile = useMemo(() => width && width <= 700, [width]);
 
   useLogPageView('rate_limit', () => rateExceeded);
   useLogPageView('timeline', () => !!user);
@@ -263,6 +308,8 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
                 alwaysVisible={index === 0}
               />
             ))}
+
+            <div ref={endOfListRef} />
           </ContainerRepos>
         ) : (
           <ContainerNoRepo>
@@ -281,4 +328,3 @@ const Timeline = ({ user, repos, rateExceeded }: TimelineProps) => {
 };
 
 export default Timeline;
-
